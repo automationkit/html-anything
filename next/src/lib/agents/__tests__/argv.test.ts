@@ -1,5 +1,56 @@
 import { describe, expect, it } from "vitest";
-import { parseLine, makeParser } from "../argv";
+import { parseLine, makeParser, sanitizeAgentStderrLine } from '../argv';
+
+describe('parseLine codex lifecycle', () => {
+  it('reports the thread and generation start', () => {
+    expect(
+      parseLine(
+        'codex',
+        JSON.stringify({ type: 'thread.started', thread_id: 'thread_fixture' }),
+      ),
+    ).toEqual([{ kind: 'meta', key: 'session', value: 'thread_fixture' }]);
+
+    expect(parseLine('codex', JSON.stringify({ type: 'turn.started' }))).toEqual([
+      { kind: 'meta', key: 'phase', value: 'generating' },
+    ]);
+  });
+
+  it('reports diagnostic items as warnings instead of HTML', () => {
+    expect(
+      parseLine(
+        'codex',
+        JSON.stringify({
+          type: 'item.completed',
+          item: { type: 'error', message: 'Synthetic diagnostic' },
+        }),
+      ),
+    ).toEqual([
+      { kind: 'meta', key: 'warning', value: 'Synthetic diagnostic' },
+    ]);
+  });
+});
+
+describe('sanitizeAgentStderrLine', () => {
+  it('redacts the response body from Codex model refresh diagnostics', () => {
+    expect(
+      sanitizeAgentStderrLine(
+        'codex',
+        'ERROR codex_models_manager::manager: failed to refresh available models: decode failed; body: {"data":[{"id":"synthetic-model"}]}',
+      ),
+    ).toBe(
+      'ERROR codex_models_manager::manager: failed to refresh available models: decode failed; body: <redacted>',
+    );
+  });
+
+  it('preserves unrelated stderr', () => {
+    expect(sanitizeAgentStderrLine('codex', 'ordinary stderr')).toBe(
+      'ordinary stderr',
+    );
+    expect(sanitizeAgentStderrLine('claude', 'ordinary stderr')).toBe(
+      'ordinary stderr',
+    );
+  });
+});
 
 describe("parseLine opencode", () => {
   it("extracts text from nested part payload", () => {
@@ -158,6 +209,62 @@ describe("parseLine opencode", () => {
         kind: "meta",
         key: "cost_usd",
         value: 0.015,
+      },
+    ]);
+  });
+});
+
+describe("parseLine bob", () => {
+  it("extracts text from stream-json output", () => {
+    const line = JSON.stringify({
+      text: "<html><body>Hello</body></html>",
+    });
+
+    expect(parseLine("bob", line)).toEqual([
+      {
+        kind: "delta",
+        text: "<html><body>Hello</body></html>",
+      },
+    ]);
+  });
+
+  it("extracts content field when present", () => {
+    const line = JSON.stringify({
+      content: "<html><body>World</body></html>",
+    });
+
+    expect(parseLine("bob", line)).toEqual([
+      {
+        kind: "delta",
+        text: "<html><body>World</body></html>",
+      },
+    ]);
+  });
+
+  it("extracts message field when present", () => {
+    const line = JSON.stringify({
+      message: "<html><body>Test</body></html>",
+    });
+
+    expect(parseLine("bob", line)).toEqual([
+      {
+        kind: "delta",
+        text: "<html><body>Test</body></html>",
+      },
+    ]);
+  });
+
+  it("handles final answer after thinking when --hide-intermediary-output is used", () => {
+    // When --hide-intermediary-output is enabled, Bob only emits the final answer.
+    // This test verifies that the parser correctly handles the final completion.
+    const finalAnswer = JSON.stringify({
+      text: "<html><body>Final result</body></html>",
+    });
+
+    expect(parseLine("bob", finalAnswer)).toEqual([
+      {
+        kind: "delta",
+        text: "<html><body>Final result</body></html>",
       },
     ]);
   });

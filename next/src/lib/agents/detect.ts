@@ -60,6 +60,8 @@ export const AGENTS: AgentDef[] = [
       { id: "claude-opus-4-7", label: "claude-opus-4-7" },
       { id: "claude-sonnet-4-6", label: "claude-sonnet-4-6" },
       { id: "claude-haiku-4-5", label: "claude-haiku-4-5" },
+      { id: "MiniMax-M3", label: "MiniMax-M3" },
+      { id: "MiniMax-M2.7", label: "MiniMax-M2.7" },
     ],
   },
   {
@@ -138,6 +140,14 @@ export const AGENTS: AgentDef[] = [
       { id: "claude-sonnet-4.6", label: "Claude Sonnet 4.6" },
       { id: "gpt-5.2", label: "GPT-5.2" },
     ],
+  },
+  {
+    id: "bob",
+    label: "IBM Bob Shell",
+    bin: "bob",
+    envOverride: "BOB_BIN",
+    vendor: "IBM",
+    fallbackModels: [DEFAULT_MODEL],
   },
   {
     id: "opencode",

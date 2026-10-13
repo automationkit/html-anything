@@ -83,6 +83,12 @@ export function buildArgv(agent: string, _opts: AgentArgvOpts = {}): string[] {
         "json",
         ...(model ? ["--model", model] : []),
       ];
+    case "bob":
+      // Bob's `-p`/`--prompt` flag expects an argument; we stream the prompt via
+      // stdin, so omit `-p` and just request stream-json output.
+      // --hide-intermediary-output suppresses thinking/reasoning, leaving only
+      // the final completion in stdout.
+      return ["--output-format", "stream-json", "--hide-intermediary-output"];
     case "opencode":
       return [
         "run",
@@ -138,6 +144,19 @@ export function envFor(agent: string): NodeJS.ProcessEnv {
   const base = { ...process.env };
   if (agent === "gemini") base.GEMINI_CLI_TRUST_WORKSPACE = "true";
   return base;
+}
+
+const CODEX_MODEL_REFRESH_DIAGNOSTIC =
+  'codex_models_manager::manager: failed to refresh available models';
+const RESPONSE_BODY_MARKER = '; body: ';
+
+export function sanitizeAgentStderrLine(agent: string, line: string): string {
+  if (agent !== 'codex' || !line.includes(CODEX_MODEL_REFRESH_DIAGNOSTIC)) {
+    return line;
+  }
+  const bodyIndex = line.indexOf(RESPONSE_BODY_MARKER);
+  if (bodyIndex === -1) return line;
+  return `${line.slice(0, bodyIndex + RESPONSE_BODY_MARKER.length)}<redacted>`;
 }
 
 export type AgentParse =
@@ -306,14 +325,28 @@ function parseLineWithState(agent: string, line: string, state: ParseState): Age
   }
 
   if (agent === "codex") {
+    if (obj.type === 'thread.started' && typeof obj.thread_id === 'string') {
+      out.push({ kind: 'meta', key: 'session', value: obj.thread_id });
+    }
+    if (obj.type === 'turn.started') {
+      out.push({ kind: 'meta', key: 'phase', value: 'generating' });
+    }
     if (obj.type === "item.completed" && obj.item && typeof obj.item === "object") {
-      const item = obj.item as { item_type?: string; type?: string; text?: string };
+      const item = obj.item as {
+        item_type?: string;
+        type?: string;
+        text?: string;
+        message?: string;
+      };
       const itemType = item.item_type ?? item.type;
       if (
         (itemType === "assistant_message" || itemType === "agent_message") &&
         typeof item.text === "string"
       ) {
         out.push({ kind: "delta", text: item.text });
+      }
+      if (itemType === 'error' && typeof item.message === 'string') {
+        out.push({ kind: 'meta', key: 'warning', value: item.message });
       }
     }
     if (obj.type === "item.delta" && typeof obj.text === "string") {
@@ -411,6 +444,12 @@ function parseLineWithState(agent: string, line: string, state: ParseState): Age
   }
 
   if (agent === "qwen") {
+    if (typeof obj.text === "string") out.push({ kind: "delta", text: obj.text });
+    if (typeof obj.content === "string") out.push({ kind: "delta", text: obj.content });
+    if (typeof obj.message === "string") out.push({ kind: "delta", text: obj.message });
+  }
+
+  if (agent === "bob") {
     if (typeof obj.text === "string") out.push({ kind: "delta", text: obj.text });
     if (typeof obj.content === "string") out.push({ kind: "delta", text: obj.content });
     if (typeof obj.message === "string") out.push({ kind: "delta", text: obj.message });
