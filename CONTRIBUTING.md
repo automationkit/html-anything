@@ -1,241 +1,152 @@
-# Contributing to HTML Anything
+# Contributing to OpenMotion
 
-Thanks for thinking about contributing. HTML Anything is small on purpose — most of the value lives in **files** (skill folders, prompt fragments, agent adapters) rather than framework code. The highest-leverage contributions are usually one folder, one Markdown file, or a ten-line adapter.
+[简体中文](CONTRIBUTING.zh-CN.md)
 
-This guide tells you exactly where to look for each type of contribution and what bar a PR has to clear before we merge.
+## Start with one useful contribution
 
-<p align="center"><b>English</b> · <a href="CONTRIBUTING.zh-CN.md">简体中文</a></p>
+Designers, creators, prompt authors and engineers are all welcome. The [OpenMotion Library](library/README.md) is the shared home for creative contributions; core production workflow changes remain in `skills/`.
 
----
+| Contribution | Location | Include |
+| --- | --- | --- |
+| A reusable method | `library/skills/<name>/SKILL.md` | Name and description frontmatter, a clear trigger, steps and a real usage example. |
+| A template | `library/templates/<name>/` | Editable source or a maintained source link, `TEMPLATE.md`, preview and adaptation checks. |
+| A motion component | `library/components/<name>/` | Source or a labeled recipe, timing, inputs, editable choices and review notes. |
+| A motion design system | `library/design-systems/<name>/MOTION_DESIGN.md` | Visual language, pacing, movement, sound, references and review criteria. |
+| A Brandkit | `library/brandkits/<name>/BRANDKIT.md` | Confirmed facts, copy, identity, asset locations and permission notes. |
+| A Studio UI component | [packages/open-design-ui](packages/open-design-ui/README.md) | States, semantic tokens, an interactive example and a product usage. |
+| Runtime / editor / agent support | Existing modules linked in the [architecture](docs/product/architecture.md) | A reproducible case, focused change and checks for the affected boundary. |
 
-## Three things you can ship in one afternoon
+Use the [entry checklist](library/ENTRY_TEMPLATE.md), link the new entry from its collection, and preserve sources and licenses. Label references, recipes and editable examples accurately. Adding a folder does not register it in Studio, the MCP workflow registry or the default five-Skill installation. Packaging uses an explicit file list.
 
-| If you want to… | You're really adding | Where it lives | Ship size |
-|---|---|---|---|
-| Make HTML Anything render a new kind of artifact (an invoice, a job posting, an iOS Settings screen…) | a **Skill** | [`next/src/lib/templates/skills/<your-skill>/`](next/src/lib/templates/skills/) | one folder, ~3 files |
-| Hook up a new coding-agent CLI | an **Agent adapter** | [`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts) + [`next/src/lib/agents/detect.ts`](next/src/lib/agents/detect.ts) | ~10 lines in one array |
-| Add a new export target (WeChat Channels, Douyin captions, Notion, …) | an **Export adapter** | [`next/src/components/export-menu.tsx`](next/src/components/export-menu.tsx) + helper under `next/src/lib/export/` | one component + one helper |
-| Add a feature, fix a bug, refactor the streaming parser | code | `next/src/app/`, `next/src/lib/`, `next/src/components/` | normal PR |
-| Improve docs, port a section into another language, fix typos | docs | `README.md`, `README.zh-CN.md`, this file | one PR |
+For published motion guidance source and locale metadata, use the [catalog contribution loop](https://github.com/nexu-io/openmotion/tree/main/library/templates/catalog#change-a-template). Stage changes before running the storage-policy check. New media needs no CMS account; maintainers prepare final media on the original PR before Squash merge.
 
-If you're not sure which bucket your idea is in, [open an issue first](https://github.com/nexu-io/html-anything/issues/new) and we'll point you at the right surface.
+## Media in the default npm package
 
----
+Skill card covers — both static WebP posters and optional animations — are hosted
+rather than bundled into the default npm package. Add
+`studio/src/motion/skill-covers/<name>.webp` and/or
+`studio/src/motion/skill-covers/<name>.mp4` (or WebM/GIF) to the same PR and use
+`skillCover('<name>')` in `skillCatalog.ts` (pass the format for WebM/GIF).
+Vite development can preview the draft media. The existing
+[Prepare and merge PR workflow](docs/repository-storage.md#prepare-final-pr-media-before-merging)
+uploads the cover media and records its immutable URLs in `repository-media.json`.
+The storage check names any Skill cover media awaiting preparation. If replacing
+previously prepared media, stage the new bytes with `git add -f`. Include media
+attribution with the source.
 
-## Local setup
+The distribution job reports the actual compressed default npm package and the
+largest file and directory changes. Growth of 1 MiB raises a warning. The default
+package has a 24 MiB budget. If a feature needs new offline media, list its
+runtime purpose beside its path in `scripts/distribution.ts` and review any
+necessary budget change in the same PR.
 
-```bash
-git clone https://github.com/nexu-io/html-anything.git
-cd html-anything
-pnpm install
-pnpm dev                  # next dev — http://localhost:3000
-pnpm build                # next build, when verifying a release-shaped bundle
-```
+## PR workflow
 
-Node `~20` and `pnpm` are required. macOS, Linux, and WSL2 are the primary paths. Native Windows should work but isn't a primary target — file an issue if it doesn't.
+### Follow through on review
 
-Before you push, make sure you have **at least one coding-agent CLI logged in** (`claude login`, `cursor login`, `gemini auth`, etc.) so you can actually run an end-to-end generation. PRs that touch the streaming or agent layer are expected to include a screenshot or log snippet showing it worked.
+Opening a PR starts the review cycle. The author is responsible for following up on comments, checks and conflicts until the change is ready or a clear blocker is reported. This applies to code, templates, media and Skills, including PRs created by an Agent.
 
-> **A note on this project.** It is a normal Next.js 16 App Router app — no daemon, no Electron shell, no extra processes. Everything happens in `next dev`: server routes spawn the local CLI, stream stdout back as SSE, and the browser appends into an iframe `srcdoc`. If you find yourself wanting to introduce a separate long-running process, please open a discussion first.
+1. Read every unresolved review thread and the latest CI results. Verify each claim against the current code or contribution before changing it; automated feedback can be wrong.
+2. Fix confirmed issues, run the applicable checks, and push follow-up commits. Reply on each thread with the fix, commit and validation. If you disagree, explain the evidence and proposed outcome instead of ignoring the comment.
+3. Resolve addressed threads when your permissions allow. A resolved thread must have a verified outcome; do not mark unanswered feedback resolved just to clear a merge warning. If you cannot resolve it or a disagreement remains, explain what still needs the reviewer.
+4. Fix failing required checks and merge conflicts. After a fix push, re-request review from reviewers who already reviewed the PR and have not reviewed the new commit, when your permissions allow; otherwise report that re-review is pending. A reply alone does not re-request review.
+5. Before reporting review follow-up complete, refresh the PR state and report remaining threads, CI, conflicts or pending re-review. Green CI alone does not mean the review is complete or authorize merging or publishing.
 
----
+Agents follow the same process through [Repository PR review follow-up](AGENTS.md#repository-pr-review-follow-up). Authors can use any suitable PR interface; installing a particular Skill is not required.
 
-## Adding a new Skill
+### Automatic follow-up with an Agent
 
-A skill is a folder under [`next/src/lib/templates/skills/`](next/src/lib/templates/skills/) with a `SKILL.md` at the root, following Claude Code's [`SKILL.md` convention][skill] plus a small extended frontmatter that the picker reads. **No registration step.** Drop the folder in, restart `pnpm dev`, the picker shows it.
-
-### Skill folder layout
+Ask your Agent to keep the review loop active while waiting for CI or comments. Claude Code can use `Monitor` when that tool is available in the session; other clients can use their monitor/wait tools or a lightweight session wait. The [Agent waiting guidance](AGENTS.md#automatic-waiting-during-pr-follow-up) covers state changes, CI aggregation and session lifetime.
 
 ```text
-next/src/lib/templates/skills/your-skill/
-├── SKILL.md            # required — prompt body + frontmatter
-├── example.html        # required — what the agent should produce, hand-authored
-├── assets/             # optional — fonts, images, reusable CSS, layout fragments
-└── references/         # optional — design-system snippets, references the agent should Read
+Keep following PR_URL through CI and review in this session. Use an available
+monitor/wait tool, or wait for PR state changes in-session. Verify new feedback,
+fix confirmed issues and required CI/conflicts, push validated changes, reply and
+resolve addressed threads, and re-request prior reviewers when permitted.
+Continue until the review follow-up is ready or a concrete blocker needs me.
+Report the latest state. Do not merge or publish.
 ```
 
-### `SKILL.md` shape
+Replace `PR_URL` with your PR link. A promise to keep watching is not a running monitor: ask the Agent to identify the active mechanism and its lifetime. Closing a session stops session-only waiting; unattended tracking needs a separately configured durable runner.
 
-```markdown
----
-name: your-skill
-description: One sentence shown in the picker preview.
-mode: prototype          # prototype | deck | frame | social | office | doc | mockup | vfx
-scenario: marketing      # design | marketing | engineering | product | finance | hr | sale | personal
-surface: desktop         # desktop | mobile | A4 | 1080x1920 | 1600x900 | 1920x1080 | …
-preview:
-  type: iframe           # iframe | image | deck
-  thumbnail: docs/screenshots/skills/your-skill.png   # optional, used in the README showcase grid
-design_system:
-  requires: optional     # required | optional | none
-featured: false          # set true if this should appear in "Showcase examples"
-example_prompt: |
-  Three-sentence example prompt that demonstrates the kind of input this skill is for.
----
+### Submit a template with your Agent
 
-# Your Skill
+Share your video, reference or editable project with your Agent and paste this brief:
 
-<one-paragraph identity / discipline statement — voice, intent, what the agent must commit to>
-
-## Hard constraints
-- 8 px baseline grid · all spacing / line-height / font-size as multiples of 8.
-- CJK-first font stack: `"Noto Sans SC", "PingFang SC", "Source Han Sans"`. Latin: `"Inter", "Manrope"`.
-- Color contrast ≥ 4.5. Real `:focus` state on every interactive element.
-- Must use the user's real data. No `lorem ipsum`. No invented metrics. No purple gradients.
-
-## Layout
-
-<the structure / sections / hierarchy the agent should produce, with concrete tokens
- — sizes, ratios, named slots — not vague aesthetic prose>
-
-## What "good" looks like
-- <one-line positive example>
-- <another>
-
-## What "bad" looks like
-- <one-line negative example, mirror of the slop blacklist if relevant>
-- <another>
+```text
+Create a reusable OpenMotion template from the video or project I provide.
+Read https://github.com/nexu-io/openmotion/blob/main/CONTRIBUTING.md and the linked
+template catalog contribution guide. Use the OpenMotion video-to-template workflow
+for a reference video; preserve editable source for an existing project.
+Include a preview, replaceable content, TEMPLATE.md, motion guidance, source
+attribution and asset licenses. Register catalog entries and locale metadata only
+as described in the catalog guide. Run the applicable template and storage checks.
+Prepare a focused pull request against nexu-io/openmotion with an English title
+and description, and show me the template and validation results for review.
+Do not merge or publish packages or CMS content.
 ```
 
-### Bar for merging a new skill
+Studio's **Submit template** link opens this guide. **Recreate and submit** copies a
+brief that also identifies the selected template; **Recreate template** copies only
+the recreation brief. Paste either into your Agent to continue. These controls do
+not upload media or create a pull request by themselves.
 
-1. **Real `example.html` ships in the folder.** Hand-author it once — the agent has a target to copy. PRs without one get bounced.
-2. **The example renders in the browser** (`pnpm dev` → pick the skill → ⌘+Enter → screenshot). Attach the screenshot to the PR.
-3. **Hard constraints exist and are specific.** Vague directives ("use modern typography") are not constraints. Real ones look like "Inter 96 / 64 / 40 / 24 / 16 px, 8 px grid, max two weights per slide".
-4. **No `lorem ipsum`** anywhere in the example. If the example uses placeholder data, it must be plausibly-real placeholder data.
-5. **Slug uses ASCII lowercase with dashes** — `deck-swiss-international`, `social-x-post-card`. Mirror the 75 existing folders.
-6. **If you vendored work from another repo**, the original `LICENSE` and authorship attribution have to ship inside your skill folder. Example: `next/src/lib/templates/skills/deck-guizang-editorial/LICENSE` preserves the original op7418 license verbatim.
+### Submit a Brand Kit
 
-### Picker grouping
+Studio's **Submit Brand Kit** link opens this contribution guide. Start with a
+public website or a local Brand Kit Motion Package. Include the original source,
+permission and license notes, reusable design tokens and brand assets, and a
+preview of the fixed showcase. Mark the package `brand-kit` and `style-only`:
+its colors, typography and visual rules can be reused, while the showcase's story
+and timing are not template guidance. See [Brand Kits](docs/brand-kits.md).
 
-The picker organizes skills along two axes. Pick values that already exist where possible — only introduce a new value if your skill genuinely doesn't fit:
+Ask your Agent to prepare a focused pull request with the source references,
+package validation and preview evidence. Keep private context files and rules out
+of the contribution. The link does not upload a kit, submit a pull request or
+publish it to the official collection. Catalogue inclusion requires review and
+an explicit update to the maintained catalogue.
 
-- **`mode`** — `prototype` · `deck` · `frame` · `social` · `office` · `doc` · `mockup` · `vfx`.
-- **`scenario`** — `design` · `marketing` · `engineering` · `product` · `finance` · `hr` · `sales` · `personal` · `operations` · `education` · `creator` · `video`.
+### Submit a skill with your Agent
 
----
+Have a local folder with a `SKILL.md`, or a public repository with one? Share it with your Agent and paste this brief:
 
-## Adding a new coding-agent CLI
-
-Hooking up a new agent (e.g. some new shop's `foo-coder` CLI) is one entry in [`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts):
-
-```ts
-{
-  id: 'foo',
-  name: 'Foo Coder',
-  bin: 'foo',
-  detect: { args: ['--version'] },
-  build: (prompt: string) => ({
-    args: ['exec', '-p', prompt],
-    stdin: null,                     // or 'prompt' if the CLI reads from stdin
-  }),
-  stream: 'plain',                   // 'plain' | 'json-event' | 'claude-stream-json'
-}
+```text
+Contribute the Agent skill I provide (a local SKILL.md folder or a public GitHub
+repository) to OpenMotion. Read https://github.com/nexu-io/openmotion/blob/main/CONTRIBUTING.md
+and library/ENTRY_TEMPLATE.md first. Confirm that I wrote the skill or that its
+license allows redistribution; record the author, original URL or version and the
+licenses of its code and media, and stop to ask me if any of this is unclear.
+Fork nexu-io/openmotion and branch from the latest main. Put the skill at
+library/skills/<name>/SKILL.md with name and description frontmatter, a clear
+trigger, steps and a real usage example; keep its references and scripts in the
+same folder and add a README.md from the entry checklist. Link the entry from the
+Skills row of library/README.md. Do not change skills/, Studio, the MCP registry or
+the distribution file list. Open a draft pull request against nexu-io/openmotion
+with an English title and description that state the source and license, then send
+me the link. Do not merge or publish anything.
 ```
 
-That's it. `/api/agents` will detect it on `PATH`, the top-bar picker shows it, the chat path works through the same SSE pipeline. If the CLI emits **typed events** (like Claude Code's `--output-format stream-json`), add a parser in [`next/src/lib/agents/invoke.ts`](next/src/lib/agents/invoke.ts) and set `stream: 'claude-stream-json'`.
+Studio's **Submit a skill** button on the Skills page opens this section. It does not
+upload files or create a pull request by itself.
 
-### Bar for merging an agent adapter
+Work from the repository root; read [AGENTS.md](AGENTS.md) and the [architecture](docs/product/architecture.md). Use the pinned CI Node version. Keep `package-lock.json` and `scripts/runtime-lock.json` in sync with any intentional dependency change.
 
-1. **A real session works end-to-end.** Run `pnpm dev`, pick your agent, generate any skill's `example_prompt`, and paste the SSE log into the PR description showing it streamed an artifact through.
-2. **`PATH` detection works on macOS, Linux, and WSL.** The scanner already includes `~/.local/bin` · `~/.bun/bin` · `/opt/homebrew/bin` · `~/.npm-global/bin`; if your CLI lives somewhere else, add the dir to the scan list.
-3. **The README's "Supported coding agents" table gets one row** in both `README.md` and `README.zh-CN.md`.
-4. **Stream parser is reusable.** If the CLI emits the same JSON-line shape as another adapter, share the parser — don't fork.
+Before opening a PR, follow the [local validation guidance](AGENTS.md#local-validation) and report the checks you actually ran. Studio unit tests use `npm run test:studio`. Model creation and visual acceptance require separate evidence. Do not overwrite real user data or host configuration to test an installer.
 
----
+Keep PRs focused and describe the user-visible behavior and actual validation. Discuss substantial changes in an existing issue, requirement or PR description; a separate issue is not required when the work is already defined. Review the entire product architecture for each change and update it only when needed, following the [shared guidance](AGENTS.md#product-architecture-review); documentation edits are not required in every PR. Preserve existing Git history and push follow-up commits during review; do not force-push a shared branch.
 
-## Adding a new export target
+For an agent contribution: read the entry and sources, make the requested change, update the affected guide and [change record](docs/product/changes.md), run the applicable checks, and report the exact result and remaining gaps. Do not treat successful installation, technical rendering and human content acceptance as interchangeable.
 
-Export targets live in two places: a helper under `next/src/lib/export/` that produces the bytes (string for `.html`, Blob for `.png`, `ClipboardItem` for paste), and a menu entry in [`next/src/components/export-menu.tsx`](next/src/components/export-menu.tsx) that wires it into the UI.
+Use the PR Actions summary to review new duplicate fragments and unused code or dependencies. The report is advisory. When a confirmed issue needs a separate change, link its source PR from a GitHub issue labeled `maintainability`, describe the impact, and assign an owner. Review open follow-ups in the existing engineering review. Promote repeat findings to a required check only after the rule is explicit and historical PRs show that the check detects it reliably.
 
-### Bar for merging an export target
+Only deliberately public documentation belongs here. Do not commit credentials, internal links, private plans, workstation paths or user projects. Distribution uses the positive list in `scripts/distribution.ts`; newly shipped files require an explicit decision. Preserve all upstream attribution and license notices. Do not add telemetry or publish a package without a separate decision.
 
-1. **Round-trip test in the target platform.** Paste / upload the output into the platform itself (WeChat editor, X composer, Zhihu editor) and screenshot the result in the PR.
-2. **No platform credentials in code.** If the target needs an API key, the user supplies it in settings; we don't ship one.
-3. **Output is self-contained.** `.html` exports inline their CSS via `juice`; PNG exports use `modern-screenshot` at 2×.
+Keep the base install focused on runtime files. Serve demo and preview video on demand when feasible, and explain any offline requirement in the PR. If a change adds assets, dependencies or build configuration, inspect the final npm tarball and fill in **Install package impact**. Vite URL imports, asset globs and `public/` copies can add files to the shipped Studio build without changing the distribution list.
 
----
+Contributions are licensed under the repository's [Apache-2.0 license](LICENSE); vendored components retain their own terms. This migration branch is for review only and must not be merged or published automatically.
 
-## Code style
+## Repository media and size
 
-We're not pedantic about formatting (Prettier on save is fine), but two rules are non-negotiable because they show up in the prompt stack and the user-facing API:
+For template projects, commit the editable files under the catalog entry's `source/` directory and refresh the source manifest and project-file hashes. You do not need to upload project files or ZIPs to `r.open-design.ai`, obtain CMS credentials or supply new public download URLs. Local Studio/MCP read the registered checkout files; hosted NPM consumers receive them through automatic main-branch synchronization after merge. See [contributing editable project files](docs/template-repository.md#contribute-editable-project-files). Website CMS publication is a separate internal task.
 
-1. **Single quotes in TS/TSX.** Strings are single-quoted unless escaping makes them ugly. The codebase is already consistent — please match.
-2. **Comments in English.** Even if the PR is translating something into 中文, code comments stay in English so we can keep one set of greppable references.
-
-Beyond that:
-
-- **Don't narrate.** No `// import the module`, no `// loop through items`. If the code reads obviously, the comment is noise. Save comments for non-obvious intent or constraints the code can't express.
-- **TypeScript for `next/src/`.** No new top-level `.js` files unless there's a compelling reason.
-- **No new top-level dependencies** without a paragraph in the PR description on what we get vs. what bytes we ship. The dep list in [`next/package.json`](next/package.json) is small on purpose.
-- **Run `pnpm build`** before pushing structural changes. Type errors block merge.
-
----
-
-## Commits & pull requests
-
-- **One concern per PR.** Adding a skill + refactoring the SSE parser + bumping a dep is three PRs.
-- **Title is imperative + scope.** `add deck-product-launch skill`, `fix SSE backpressure when CLI hangs`, `docs: clarify skill frontmatter`.
-- **Body explains the why.** "What does this do" is usually obvious from the diff; "why does this need to exist" rarely is.
-- **Reference an issue** if there is one. If there isn't and the PR is non-trivial, open one first so we can agree the change is wanted before you spend the time.
-- **No squash-during-review.** Push fixups; we'll squash on merge.
-- **No force-push to a shared branch** unless the reviewer asked.
-
-We don't enforce a CLA. Apache-2.0 covers us; your contribution is licensed under the same.
-
----
-
-## Reporting bugs
-
-Open an issue with:
-
-- What you ran (the exact `pnpm dev` invocation, or which UI button you clicked).
-- Which agent CLI was selected (Claude Code? Cursor Agent? …).
-- The skill that triggered it.
-- The relevant **server log tail** — most "the artifact never rendered" reports get diagnosed in 30 seconds when we can see `spawn ENOENT` or the CLI's actual error.
-- A screenshot if it's UI.
-
-For prompt-stack bugs ("the agent emitted a purple gradient hero, the constraint in `SKILL.md` was supposed to forbid that"), include the **full assistant message** so we can see whether the violation was the model or the prompt.
-
----
-
-## Asking questions
-
-- Architecture question, design question, "is this a bug or a misuse" → [GitHub Discussions](https://github.com/nexu-io/html-anything/discussions) (preferred — searchable for the next person).
-- "How do I write a skill that does X" → open a discussion. We'll answer it and turn the answer into an entry in this guide if the pattern is missing.
-
----
-
-## What we don't accept
-
-To keep the project focused, please don't open PRs that:
-
-- **Vendor a model runtime.** HTML Anything's whole bet is "your existing CLI is enough". We don't ship `pi-ai`, OpenAI keys, model loaders, or hosted inference proxies.
-- **Rewrite the frontend away from the current stack without prior discussion.** Next.js 16 App Router + React 19 + Tailwind v4 + TypeScript is the line. No Astro, Solid, Svelte, or other framework rewrites unless maintainers explicitly want that migration.
-- **Replace the SSE streaming model with WebSocket / long-polling.** SSE + iframe `srcdoc` append is the simplest thing that ships a live render; we keep it.
-- **Add telemetry / analytics / phone-home.** HTML Anything is local-first. The only outbound calls are to the agent CLI on your laptop, plus whatever the generated HTML itself references (Tailwind CDN, Google Fonts).
-- **Bundle a binary** without a license file and authorship attribution next to it.
-- **Add a skill whose `example.html` is empty / placeholder / clearly model-generated without review.** A skill is judged by what its example renders; an empty example is rejected immediately.
-
-If you're not sure whether your idea fits, open a discussion before writing the code.
-
----
-
-## Localization maintenance
-
-The repo ships two languages at parity: English (`README.md`, `CONTRIBUTING.md`) and 简体中文 (`README.zh-CN.md`, `CONTRIBUTING.zh-CN.md`). When adding or renaming a skill, agent, or export target:
-
-- Update **both** READMEs' tables.
-- Update **both** CONTRIBUTING docs if your change introduces a new contribution surface or a new bar a PR has to clear.
-- **Skill prompt bodies stay in their source language.** Don't translate `SKILL.md` — it's part of the prompt stack the agent reads, and keeping one source language avoids multiplying prompt QA across locales.
-- Daemon error messages, file names, and agent-generated artifact text are known limitations unless a PR explicitly scopes them.
-
----
-
-## License
-
-By contributing, you agree your contribution is licensed under the [Apache-2.0 License](LICENSE) of this repository.
-
-Vendored work retains its original license and authorship attribution — see each `next/src/lib/templates/skills/<skill>/` folder's own `LICENSE` / `README.md` for what it inherits from upstream. The most prominent example is [`next/src/lib/templates/skills/deck-guizang-editorial/`](next/src/lib/templates/skills/deck-guizang-editorial/), which retains the original license and authorship attribution to [op7418](https://github.com/op7418).
-
-[skill]: https://docs.anthropic.com/en/docs/claude-code/skills
+Keep embedded README previews directly readable. Large existing previews use public R2 URLs registered in `repository-media.json`; small artwork, template source and browser dependencies stay local. The ordinary Git checkout has a 128 MiB advisory target; exceeding the total reports a warning without blocking contributions or media cleanup. Full videos and optional template archives use Git LFS with downloads excluded by default. Follow [storage, scoped downloads and contribution checks](docs/repository-storage.md); run `npm run storage:check` after staging. For contributed media, use the documented **Prepare and merge PR** Action after final review; contributors do not need upload credentials.

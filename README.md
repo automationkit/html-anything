@@ -1,547 +1,799 @@
-# HTML Anything
+<p align="center"><img src="docs/readme/openmotion-logo.svg" width="420" alt="OpenMotion"></p>
 
-<p align="center"><sub>From the team behind <a href="https://github.com/nexu-io/open-design"><b>Open Design</b></a> — <b>40k★ · 200+ contributors</b>, production-grade and iterating faster. html-anything is the focused agent-era HTML editor; if it clicks for you, <a href="https://github.com/nexu-io/open-design">Open Design</a> is where the same team ships at scale.</sub></p>
-
-<p align="center"><b>Live page:</b> <a href="https://open-design.ai/html-anything/"><b>open-design.ai/html-anything/</b></a> — overview, surface modes, and showcase before you clone.</p>
-
-> **Markdown is the draft. HTML is what humans read. Your local agent writes it.** The agentic HTML editor — in the agentic era, you don't hand-edit docs anymore, so the output format should be what the reader actually wants: HTML. Local-first, zero API key, reuses the CLI session you already have logged in — **9 coding-agent CLIs** auto-detected on your `PATH` (Claude Code · Cursor Agent · Codex · Gemini CLI · GitHub Copilot CLI · OpenCode · Qwen Coder · Aider · IBM Bob), driven by **75 composable skill templates** across **9 deliverable surfaces** (magazine articles · keynote decks · résumés · posters · Xiaohongshu cards · tweet cards · web prototypes · data reports · Hyperframes videos). One-click export to WeChat / X / Zhihu, or download `.html` / `.png`.
+<p align="center"><strong>The open-source Claude Motion &amp; CapCut alternative</strong></p>
 
 <p align="center">
-  <img src="docs/assets/banner.png" alt="HTML Anything — the agentic HTML editor, on your laptop" width="100%" />
+  <picture>
+    <source type="image/webp" srcset="docs/readme/capcut-claude-motion-cover.webp">
+    <source media="(max-width: 600px)" srcset="https://releases.open-design.ai/open-motion/media/sha256/730e1d6235820d39ba8adde42810d1165377992136a3b20290ad5d504abb527b.jpg">
+    <img src="https://releases.open-design.ai/open-motion/media/sha256/730e1d6235820d39ba8adde42810d1165377992136a3b20290ad5d504abb527b.jpg" width="100%" alt="OpenMotion — the open-source Claude Motion and CapCut alternative. Dan Martell’s original and an OpenMotion remake with Riya appear beside each other above the editable Studio timeline.">
+  </picture>
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square" /></a>
-  <a href="#supported-coding-agents"><img alt="Agents" src="https://img.shields.io/badge/agents-9%20CLIs-black?style=flat-square" /></a>
-  <a href="#skills"><img alt="Skills" src="https://img.shields.io/badge/skills-75-orange?style=flat-square" /></a>
-  <a href="#export-targets"><img alt="Export" src="https://img.shields.io/badge/export-WeChat%20%C2%B7%20X%20%C2%B7%20Zhihu%20%C2%B7%20PNG-9b59b6?style=flat-square" /></a>
-  <a href="#quickstart"><img alt="Quickstart" src="https://img.shields.io/badge/quickstart-30%20seconds-green?style=flat-square" /></a>
-  <a href="#architecture"><img alt="No API key" src="https://img.shields.io/badge/no-API%20key%20required-ff6b35?style=flat-square" /></a>
+  <a href="https://github.com/nexu-io/openmotion"><img src="docs/readme/badges/stars.svg" alt="GitHub Stars · 9.5k (2026-11-09)"></a>
+  <a href="package.json"><img src="docs/readme/badges/node.svg" alt="Node.js 22.18+"></a>
+  <a href="LICENSE"><img src="docs/readme/badges/license.svg" alt="Apache 2.0 license"></a>
+  <a href="https://github.com/nexu-io/open-design"><img src="docs/readme/badges/built-by-opendesign.svg" alt="Built by OpenDesign"></a>
 </p>
 
-<!-- This project is built on top of nexu-io/open-design — the badges below link to its community channels on purpose. -->
 <p align="center">
-  <a href="https://discord.gg/keeVPMrueT"><img alt="Discord (html-anything)" src="https://img.shields.io/badge/discord-html--anything-5865f2?style=flat-square&logo=discord&logoColor=white" /></a>
-  <a href="https://x.com/nexudotio"><img alt="Follow @nexudotio on X" src="https://img.shields.io/badge/follow-%40nexudotio-000000?style=flat-square&logo=x&logoColor=white" /></a>
-  <a href="https://github.com/nexu-io/open-design/releases/latest"><img alt="open-design release" src="https://img.shields.io/github/v/release/nexu-io/open-design?style=flat-square&label=release&color=8e44ad" /></a>
-  <a href="https://github.com/nexu-io/open-design/graphs/commit-activity"><img alt="open-design commits / month" src="https://img.shields.io/github/commit-activity/m/nexu-io/open-design?style=flat-square&label=commits%2Fmonth&color=f39c12" /></a>
-  <a href="#showcase"><img alt="Design systems" src="https://img.shields.io/badge/design%20systems-9-1abc9c?style=flat-square" /></a>
-  <a href="https://github.com/nexu-io/open-design"><img alt="Built on open-design" src="https://img.shields.io/badge/built%20on-nexu--io%2Fopen--design-ff7043?style=flat-square&logo=github&logoColor=white" /></a>
+  <a href="https://open-design.ai/motion/"><img src="docs/readme/badges/website.svg" alt="OpenMotion website" /></a>
+  <a href="https://go.open-design.ai/?utm_source=github&amp;utm_medium=referral&amp;utm_campaign=openmotion&amp;utm_content=readme_en"><img src="docs/readme/badges/opendesign-go.svg" alt="OpenDesign Go model subscriptions" /></a>
+  <a href="https://discord.com/invite/M7NnHS9gNa"><img src="docs/readme/badges/discord.svg" alt="Join the OpenMotion Discord" /></a>
+  <a href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=b6cs46dc-acb2-48ed-941d-c45642ead841"><img src="docs/readme/badges/feishu.svg" alt="Join the OpenMotion Feishu group" /></a>
+  <a href="https://x.com/OpenDesignHQ"><img src="docs/readme/badges/x-opendesignhq.svg" alt="OpenDesign on X (@OpenDesignHQ)" /></a>
+  <a href="https://x.com/OpenDesignDevs"><img src="docs/readme/badges/x-opendesigndevs.svg" alt="OpenDesign Developers on X (@OpenDesignDevs)" /></a>
+  <a href="https://www.youtube.com/channel/UChtshixMhvtgBWzoD9R_Qfg"><img src="docs/readme/badges/youtube.svg" alt="OpenDesign on YouTube" /></a>
 </p>
 
-<p align="center"><b>English</b> · <a href="README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="#quick-start">Install</a> · <a href="#agent-wall">Agents</a> · <a href="#showcase">Use cases &amp; remakes</a> · <a href="#features">Why OpenMotion</a> · <a href="#technical-guide">Setup & architecture</a> · <a href="#community">Community</a></p>
 
----
+<div align="center">
 
-## Showcase
+**English** · [简体中文](docs/README.zh-CN.md) · [日本語](docs/README.ja.md)
 
-The eight skills that surface at the top of the picker's **Featured / 推荐** group — sorted by their `recommended:` rank in `SKILL.md` frontmatter (lower = higher). Each ships a real `example.html` you can open straight from the repo, no auth, no setup.
+</div>
 
-<table>
+# OpenMotion
+
+OpenMotion is a **full-stack agentic video** studio and an **open-source alternative to Claude Motion and CapCut**. Upload a reference video or paste a social video link to **recreate it with your own brand kit and copy**.
+
+- 🎬 **Full-stack video recreation.** Code video with HTML. Your agent breaks down the reference, rebuilds its shots and transitions, and generates missing assets. Edit the timing in Studio and render an MP4 from the same project.
+- 🔑 **BYOA — Bring Your Own Agent. BYOK — Bring Your Own Keys.** OpenMotion is free and open source. Recreate videos in [your local agent](#agent-wall) with your own API keys. Supported agents include Claude Code, Codex, and WorkBuddy.
+- 🧩 OpenMotion introduces **Motion.md**, a Markdown format for shot order, timing and transitions. Use it to share how a brand film works, shot by shot.
+- 🎛️ **Images, video, music and voice.** Create artwork with GPT Image 2.6, add a shot with Seedance 2.5, score it with Suno and narrate it with Eleven v4. [Explore the models and providers](#model-wall).
+
+<a id="快速开始"></a> <a id="quick-start"></a>
+
+### Install from ChatGPT Marketplace
+
+**One-click installation. No manual configuration required.** Once installed, create motion videos from scratch, recreate reference videos, or start from a template—all in your conversation.
+
+**[Install OpenMotion in ChatGPT →](https://chatgpt.com/plugins/plugins_6a742d13e88481919b42002864b1bb26)**
+
+<a id="start-in-codex"></a>
+
+### Install in your agent
+
+Install the main Skill with the [Skills CLI](https://github.com/vercel-labs/skills):
+
+```sh
+npx skills add nexu-io/openmotion --skill openmotion
+```
+
+Then ask your agent: **Use OpenMotion to install and connect the local Studio and MCP, then help me make a video.** The Skill completes the source setup below when needed and reuses an existing workspace. Installing the Skill alone copies instructions; it does not yet install Studio or connect MCP.
+
+Copy this instruction into your local agent to set up OpenMotion from source:
+
+```text
+Read https://github.com/nexu-io/openmotion/blob/main/docs/install.md and follow the instructions to install and connect OpenMotion in the current agent.
+```
+
+After setup, the agent opens the local template library and shows the welcome followed by three project-preview cards in a self-contained HTML document. Each installation samples three distinct entries from the curated pool of four. The complete silent previews and posters are bundled, so this display does not wait for native MCP reload or fetch remote reference films. Native original-reference playback remains available separately and requires internet access. The library opens once using the opening tool's result, with no extra page or playback audit. An opening failure is reported with a usable link and does not invalidate installation. Automatic current-chat MCP activation is assessed independently. Preview a card, choose **Recreate template**, then send your brief to start creating. [Source installation guide](docs/install.md) · [Onboarding selection](docs/install.md#maintained-recommendation-selection)
+
+### Install the published npm app (optional)
+
+Source setup above remains the default for repository installation. To explicitly choose the published application with prebuilt Studio and its configured online catalog, copy this instruction into your local agent:
+
+```text
+Read https://releases.open-design.ai/motion and follow the instructions to install and connect the published npm application in the current agent.
+```
+
+[Published application installation and channel selection](docs/install.md). Published versions can lag behind this checkout.
+
+### Run the repository locally
+
+Use Git, npm and Node.js 26.11.1:
+
+```sh
+git -c filter.lfs.process= -c filter.lfs.smudge= -c filter.lfs.required=false clone --depth 1 --single-branch --branch main https://github.com/nexu-io/openmotion.git
+cd openmotion
+npm ci
+npm run build:studio
+npm start
+```
+
+Open the actual `studioUrl` or `previewUrl` printed at startup, then choose **Template library**. Studio and MCP read the templates in this checkout. To connect your agent to this same copy, follow [source setup and MCP configuration](#agent-setup). [Clone size and optional media](docs/repository-storage.md)
+
+
+### Start from an existing project
+
+Import a **HyperFrames project ZIP** into OpenMotion to continue editing its composition and local assets. Compress the project folder, open **All projects → Import projects**, then select the imported copy to edit in Studio or with your Agent. Import creates an independent copy and requires a supported native project structure.
+
+[Step-by-step import guide, required files and compatibility](docs/project-archives.md#import-from-hyperframes)
+
+<a id="agent-wall"></a>
+
+**22 local agents** · [Choose your agent](#choose-agent)
+
+<p align="center"><a href="#choose-agent"><picture><source media="(max-width: 600px)" srcset="docs/readme/agents/local-agents.mobile.png"><img src="docs/readme/agents/local-agents.png" width="100%" alt="WorkBuddy, Codex CLI, Claude Code, OpenCode, Hermes, Antigravity, Gemini CLI, Grok Build, Kimi CLI, Cursor Agent, Qwen Code, Qoder CLI, GitHub Copilot, Pi, Kiro CLI, Kilo, Mistral Vibe, DeepSeek TUI, Reasonix, Aider, Devin, Trae CLI"></picture></a></p>
+
+<a id="showcase"></a> <a id="brand-before-after"></a> <a id="what-can-you-make"></a>
+<a id="use-cases-and-remake-examples"></a>
+
+## 🎞️ Use cases and remake examples
+
+Explore product demos, brand films, talking-head videos and more. The previews below show reference videos.
+
+**[Browse the full template library →](https://open-design.ai/templates/)** — Find more templates, full videos, Motion.md and recreation instructions.
+
+### AI recuts & revisions
+
+<table width="100%">
 <tr>
 <td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/deck-guizang-editorial/"><img src="docs/screenshots/skills/deck-guizang-editorial.png" alt="deck-guizang-editorial" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/deck-guizang-editorial/"><code>deck-guizang-editorial</code></a></b> · <i>deck</i> · <code>recommended: 1</code><br/>Magazine × e-ink editorial deck, inspired by <a href="https://github.com/op7418/guizang-ppt-skill"><code>op7418/guizang-ppt-skill</code></a> — 10 locked layouts × 5 palettes (Ink / Indigo Porcelain / Forest Ink / Kraft / Dune). Reads like a printed art-zine, not a slide deck.</sub>
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/many-possible-futures.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/f4a30a4a3b2dbc5c43df68837bebb284d204a1408394e248d7df339154914917.gif" width="480" alt="Build a story from multiple scenes"></picture><br>
+<strong>OpenAI · Build a story from multiple scenes</strong><br>
+Connect different scenes around one narrative idea, then expand into a broader montage.<br>
+<a href="https://open-design.ai/templates/many-possible-futures-motion-design/">View template</a>
 </td>
 <td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/deck-swiss-international/"><img src="docs/screenshots/skills/deck-swiss-international.png" alt="deck-swiss-international" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/deck-swiss-international/"><code>deck-swiss-international</code></a></b> · <i>deck</i> · <code>recommended: 2</code><br/>Swiss International deck — 16-column grid + one saturated accent (Klein Blue / Lemon / Mint / Safety Orange) across 22 locked layouts. Cold, rational, institutional. The deck that reads "a designer made this" the moment it opens.</sub>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/doc-kami-parchment/"><img src="docs/screenshots/skills/doc-kami-parchment.png" alt="doc-kami-parchment" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/doc-kami-parchment/"><code>doc-kami-parchment</code></a></b> · <i>doc</i> · <code>recommended: 3</code><br/>Warm-parchment editorial document, inspired by <a href="https://github.com/tw93/kami"><code>tw93/kami</code></a>. <code>#f5f4ed</code> ground + ink-blue accent + single serif voice — a noticeably calmer reading surface than plain-white markdown for long essays, reports, and one-pagers.</sub>
-</td>
-<td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/magazine-poster/"><img src="docs/screenshots/skills/magazine-poster.png" alt="magazine-poster" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/magazine-poster/"><code>magazine-poster</code></a></b> · <i>poster</i> · <code>recommended: 4</code><br/>Newsprint Sunday-paper poster — oversized serif headline, two-column body, six numbered sections, dot-pattern cream ground. Reads like a printed broadsheet, not a webpage.</sub>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/video-hyperframes/"><img src="docs/screenshots/skills/video-hyperframes.png" alt="video-hyperframes" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/video-hyperframes/"><code>video-hyperframes</code></a></b> · <i>frame / video</i> · <code>recommended: 5</code><br/>Hyperframes / Remotion-compatible storyboard — 6–10 sequential <code>1920×1080</code> frames with hidden duration + transition markers and an auto-play script. Hand straight to <a href="https://github.com/heygen-com/hyperframes"><code>heygen-com/hyperframes</code></a> or Remotion to render <code>.mp4</code>.</sub>
-</td>
-<td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/frame-glitch-title/"><img src="docs/screenshots/skills/frame-glitch-title.png" alt="frame-glitch-title" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/frame-glitch-title/"><code>frame-glitch-title</code></a></b> · <i>frame</i> · <code>recommended: 6</code><br/>Glitch title frame — cyan/magenta chromatic offset, CRT scanlines, corrupted-data subtitle, ASCII noise in the corners. Cyberpunk hero card or video transition.</sub>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/vfx-text-cursor/"><img src="docs/screenshots/skills/vfx-text-cursor.png" alt="vfx-text-cursor" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/vfx-text-cursor/"><code>vfx-text-cursor</code></a></b> · <i>vfx</i> · <code>recommended: 7</code><br/>VFX text-cursor opener — a cursor "types" across the canvas, each character revealed with a hot-pink × cyan chromatic trail and directional light leaks. Drop in a quote, get a film-grade opening frame.</sub>
-</td>
-<td width="50%" valign="top">
-<a href="next/src/lib/templates/skills/frame-logo-outro/"><img src="docs/screenshots/skills/frame-logo-outro.png" alt="frame-logo-outro" /></a><br/>
-<sub><b><a href="next/src/lib/templates/skills/frame-logo-outro/"><code>frame-logo-outro</code></a></b> · <i>frame</i> · <code>recommended: 8</code><br/>Logo outro frame — logo assembles piece-by-piece with glow bloom, tagline rises, CTA appears. The closing card for a product reveal or brand film.</sub>
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/making-of-window-collage.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/dae76ee380e75eb257be035bda3697981c5cce42b53a0f61da34c46687b52e1d.gif" width="480" alt="Recut a making-of collage"></picture><br>
+<strong>Anthropic · Recut a making-of collage</strong><br>
+Layer clips and screenshots in sequence, keeping the main title readable above them.<br>
+<a href="https://open-design.ai/templates/making-of-window-collage-motion-design/">View template</a>
 </td>
 </tr>
 </table>
 
-The full skill catalog (organized by mode) is in [Skills](#skills) below.
+### Product launches & demos
 
-## Why this exists
-
-Anthropic's [Claude Code team announced](https://x.com/trq212/status/2052809885763747935) they stopped writing internal docs in Markdown — they ship HTML now. The argument is simple:
-
-| Markdown | HTML |
-|---|---|
-| Good for the writer | Good for the reader |
-| Layout limited to the renderer | Layout is yours |
-| Looks ugly screenshotted into a tweet | Already looks like a designed image |
-| Has to be re-flowed for WeChat / Zhihu / newsletter | One-click format conversion |
-
-**HTML is the final form for humans. Markdown is just an intermediate state during writing.**
-
-But "writing HTML" used to mean writing CSS, picking type scales, snapping to a grid, doing responsive — most users won't, designers won't bother, writers don't have the patience. So what we built: after you press ⌘+Enter, your **local AI agent** turns any input (Markdown / CSV / Excel / JSON / SQL / raw notes) into a **ship-ready single-file HTML** in seconds, then one-click sends it to WeChat / X / Zhihu / anywhere. "Ship-ready" is the bar — when generation finishes, the artifact is what your audience actually sees. No "I'll touch it up later" pass.
-
-We stand on four open-source shoulders:
-
-- [**`nexu-io/open-design`**](https://github.com/nexu-io/open-design) — the agent-detection layer, the design-system model, and the `SKILL.md` protocol. `next/src/lib/agents/` and `next/src/lib/templates/skills/*` mirror this architecture directly.
-- [**`mdnice/markdown-nice`**](https://github.com/mdnice/markdown-nice) — proof that `juice`-inlined CSS pastes cleanly into WeChat and Zhihu without per-platform manual fix-up.
-- [**`gcui-art/markdown-to-image`**](https://github.com/gcui-art/markdown-to-image) — the iframe → high-DPI PNG export path.
-- [**`alchaincyf/huashu-md-html`**](https://github.com/alchaincyf/huashu-md-html) — the anti-AI-slop discipline that maps into the hard constraints inside every `SKILL.md` (CJK-first font stack, 8 px baseline grid, contrast ≥ 4.5, must-use-real-data rule).
-
-## At a glance
-
-| | What you get |
-|---|---|
-| **Coding-agent CLIs (8)** | Claude Code · Cursor Agent · OpenAI Codex · Gemini CLI · GitHub Copilot CLI · OpenCode · Qwen Coder · Aider — scanned on startup across `PATH` (including `~/.local/bin`, `~/.bun/bin`, `/opt/homebrew/bin`, `~/.npm-global/bin` — directories a GUI-launched Node process normally misses), swap from the top-bar picker. |
-| **Zero API key** | We reuse the session you already have logged in via `claude login` · `cursor login` · `gemini auth`. Your existing subscription does the work; marginal cost is **$0**. |
-| **75 skill templates** | `prototype` (web / SaaS landing / dashboard / data report) · `deck` (20 keynote skills incl. Swiss International, Guizang Editorial, XHS Pastel, Hermes Cyber, Replit, Magazine Web…) · `frame` (10 Hyperframes video frames — liquid hero, NYT data chart, sticky-note flowchart, glitch title, cinema light-leak, macOS notification, logo outro…) · `social` (X / Xiaohongshu / Spotify / Reddit cards) · `office` (PM spec · eng runbook · finance report · HR onboarding · invoice · OKRs · weekly update · meeting notes · kanban) · `doc` (Kami warm-parchment editorial) · `mockup` (3D device frame) · `vfx` (text-cursor effect). |
-| **9 surface modes** | 📖 magazine article · 🎬 keynote deck · 📄 résumé · 🖼️ poster · 📱 Xiaohongshu card · 🐦 tweet card · 🛠️ web prototype · 📊 data report · 🎞️ Hyperframes video. Each has multiple skills you can pick from. |
-| **One-click export** | `juice` inlines CSS → WeChat paste with zero re-formatting · `modern-screenshot` renders the iframe to a 2× PNG → `ClipboardItem` → drop straight into the tweet composer · `<mjx-container>` → `data-eeimg` placeholder → Zhihu equations render automatically · standalone `.html` download · high-DPI `.png` download. |
-| **Streaming render** | `POST /api/convert` over SSE. The agent's stdout JSON-line stream is parsed for text deltas → server-sent events → client appends → iframe `srcdoc` updates live. Waiting for an AI generation looks like watching it type in real time. |
-| **Sandboxed preview** | `<iframe sandbox="allow-scripts allow-same-origin">`. User-emitted HTML runs in an isolated origin — Tailwind CDN / Google Fonts / inline scripts work, but cookies and localStorage are quarantined from the host. |
-| **Format auto-detect** | The editor accepts Markdown / CSV / TSV / JSON / SQL / plain text. `papaparse` + `xlsx` parse tabular data in the browser — nothing is uploaded. |
-| **Deployable to** | Local (`pnpm -F @html-anything/next dev`) · Vercel for the web layer (the agent always stays on your laptop). |
-| **License** | Apache-2.0 |
-
-## Demo
-
-<table>
+<table width="100%">
 <tr>
-<td width="50%">
-<img src="docs/screenshots/01-entry-view.png" alt="01 · Entry view" /><br/>
-<sub><b>Entry view</b> — the top bar shows your installed CLIs, the left pane is the editor, the middle is the template + design-system picker, the right is a live iframe preview. The same surface produces magazines, decks, posters, web prototypes, and Hyperframes frame scripts.</sub>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/notion-custom-agents.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/b62ffb99195f35396b6ec0b5f8f0abb8552ffd2493a5e982e5e10fd640c44a0f.gif" width="480" alt="Show a problem, then the solution"></picture><br>
+<strong>Notion · Show a problem, then the solution</strong><br>
+Move from crowded tasks to coordinated agents; adapt the sequence to your own product.<br>
+<a href="https://open-design.ai/templates/notion-custom-agents-motion-design/">View template</a>
 </td>
-<td width="50%">
-<img src="docs/screenshots/02-template-picker.png" alt="02 · 75 skills, searchable and filterable" /><br/>
-<sub><b>75 templates, searchable and filterable</b> — pick by mode (prototype / deck / frame / social / office / doc) × scenario (design / marketing / engineering / product / personal). Every skill ships an <code>example.html</code> you can open straight from the repo to see what the agent will produce.</sub>
-</td>
-</tr>
-<tr>
-<td width="50%">
-<img src="docs/screenshots/03-streaming.png" alt="03 · Live SSE streaming" /><br/>
-<sub><b>SSE streaming</b> — agent stdout JSON-line is parsed for text deltas, appended into the iframe <code>srcdoc</code> in real time. You watch the page render line by line. Don't like where it's going? Interrupt and re-prompt — no wasted full generation.</sub>
-</td>
-<td width="50%">
-<img src="docs/screenshots/04-export.png" alt="04 · One-click export" /><br/>
-<sub><b>One-click export</b> — WeChat (juice-inlined CSS) · X / Weibo / Xiaohongshu (modern-screenshot → 2× PNG → <code>ClipboardItem</code>) · Zhihu (LaTeX image placeholders) · download <code>.html</code> · download <code>.png</code>. Paste straight in, no second pass of manual formatting.</sub>
-</td>
-</tr>
-<tr>
-<td width="50%">
-<img src="docs/screenshots/05-deck-mode.png" alt="05 · Deck mode" /><br/>
-<sub><b>Deck mode</b> — 20 keynote skills, including Swiss International (Helvetica grid maximalism), Guizang Editorial (magazine ink), Open Slide Canvas (1920×1080 agent-native), Magazine Web, XHS Pastel, Hermes Cyber, Replit Style. ←/→ to navigate slides, presenter notes, PDF export.</sub>
-</td>
-<td width="50%">
-<img src="docs/screenshots/06-hyperframes.png" alt="06 · Hyperframes video frames" /><br/>
-<sub><b>Hyperframes frames</b> — 10 motion frame scripts (liquid hero, NYT data chart, sticky-note flowchart, glitch title, cinema light-leak, macOS notification, brand logo outro, text-cursor VFX, 3D device mockup, …) conforming to <a href="https://github.com/heygen-com/hyperframes">heygen-com/hyperframes</a>; hand off straight to Remotion to render <code>.mp4</code>.</sub>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="https://releases.open-design.ai/open-motion/media/sha256/66bc3f14f916a58800562af5b2c8412b2f554f36a435da950faa39ef4b82da96.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/ecbb5b36bf9997451a02fbf6db8ef9083b93326eb81b5bd1c29b7ca988d008cd.gif" width="480" alt="Turn demand into a product reveal"></picture><br>
+<strong>OpenAI · Turn demand into a product reveal</strong><br>
+Build momentum with overlapping requests, then reveal the app in one clear beat.<br>
+<a href="https://open-design.ai/templates/demand-becomes-a-desktop-release-motion-design/">View template</a>
 </td>
 </tr>
 </table>
 
-## Quickstart
+### Brand films & motion
 
-```bash
-git clone https://github.com/nexu-io/html-anything
-cd html-anything
-pnpm install
-pnpm -F @html-anything/next dev
-# → http://localhost:3000
-```
-
-Open the browser → the top bar auto-detects whichever coding-agent CLI you already have signed in → pick a template → paste content → ⌘+Enter.
-
-**No API key required.** We reuse the session you already have logged in (Claude / Cursor / Codex / Gemini / Copilot subscriptions all work).
-
-## Workspace
-
-This repo is a small pnpm workspace:
-
-- `next/` is the complete Next app (`@html-anything/next`).
-- `e2e/` is the browser-test package (`@html-anything/e2e`) and the only source of truth for Playwright cases.
-- root owns CI, docs, and `scripts/guard.ts`; root `package.json` intentionally does not proxy app or e2e commands.
-
-Run package commands from the repo root:
-
-```bash
-pnpm exec tsx scripts/guard.ts
-pnpm -F @html-anything/next dev
-pnpm -F @html-anything/next typecheck
-pnpm -F @html-anything/next test
-pnpm -F @html-anything/next build
-pnpm -F @html-anything/e2e typecheck
-pnpm -F @html-anything/e2e test
-```
-
-## Supported coding agents
-
-On startup we scan `PATH` (including `~/.local/bin`, `~/.bun/bin`, `/opt/homebrew/bin`, `~/.npm-global/bin` — directories normally missed by GUI-launched Node) and surface every CLI we recognize:
-
-| Agent | Detection binary | Invocation |
-|---|---|---|
-| **Claude Code** | `claude` | `claude -p --output-format stream-json` |
-| **OpenAI Codex** | `codex` | `codex exec --json --sandbox workspace-write` |
-| **Cursor Agent** | `cursor-agent` | `cursor-agent --print --output-format stream-json --force --trust` |
-| **Gemini CLI** | `gemini` | `gemini --output-format stream-json --yolo` |
-| **GitHub Copilot CLI** | `copilot` | `copilot --allow-all-tools --output-format json` |
-| **OpenCode** | `opencode-cli` / `opencode` | `opencode run --format json --dangerously-skip-permissions -` |
-| **Qwen Coder** | `qwen` | `qwen --yolo -` |
-| **Aider** | `aider` | `aider --no-pretty --no-stream --yes-always --message-file -` |
-| **IBM Bob** | `bob` | `bob --output-format stream-json --hide-intermediary-output` |
-
-> The detection strategy and per-CLI adapter shape are borrowed directly from [`nexu-io/open-design`](https://github.com/nexu-io/open-design) and [`multica-ai/multica`](https://github.com/multica-ai/multica): one privileged process spawns CLIs, JSON-line is the wire protocol, every CLI gets a thin adapter in [`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts).
-
-If you've already done `claude login` / `cursor login` / `gemini auth` in your terminal, HTML Anything reuses that session. **No second copy of the API key required.**
-
-## Community integrations
-
-### [Floatboat](https://floatboat.ai/combostore/html-anything-4a58QO)
-
-Floatboat is available as an in-app community integration. Install the **html-anything** Combo Skill from the Floatboat Combo Skill Store, then use it inside Floatboat.
-
-<table>
+<table width="100%">
 <tr>
-<td width="50%">
-<img src="https://github.com/user-attachments/assets/6049b725-811c-490a-93ec-4d60436e6c98" alt="HTML Anything running inside the Floatboat workspace" /><br/>
-<sub><b>In-app workflow</b> — Review the task context, HTML Anything workspace, and generated page side by side in Floatboat.</sub>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/a-world-connected-by-computational-fragments.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/d94806d916b9b7d9325db6901cc36b890ee0e4ff7503bfbd888b2d258b985925.gif" width="480" alt="Connect worlds through motion"></picture><br>
+<strong>Kimi · Connect worlds through motion</strong><br>
+Use code strips, offset slices and transitions to connect a series of brand scenes.<br>
+<a href="https://open-design.ai/templates/a-world-connected-by-computational-fragments-motion-design/">View template</a>
 </td>
-<td width="50%">
-<img src="https://github.com/user-attachments/assets/0f1c584a-8b5c-428a-b16c-4be3bdfc70e5" alt="HTML deliverable created with HTML Anything in Floatboat" /><br/>
-<sub><b>Deliverable preview</b> — Turn a brief into a polished HTML page and review the result in Floatboat.</sub>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/slack-slack.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/e5f730483a177dad8cebd3f19728d04a590a075691ca2c48544c05c73490a505.gif" width="480" alt="Rebuild a brand mark"></picture><br>
+<strong>Slack · Rebuild a brand mark</strong><br>
+Break a mark into simple shapes and reassemble it with your own colors and name.<br>
+<a href="https://open-design.ai/templates/slack-slack-motion-design/">View template</a>
 </td>
 </tr>
 </table>
 
-## Skills
+### Explainers & tutorials
 
-**75 skills under [`next/src/lib/templates/skills/`](next/src/lib/templates/skills/)**, each a folder following the Claude Code [`SKILL.md`](https://docs.anthropic.com/en/docs/claude-code/skills) convention plus an extended frontmatter (`mode` · `scenario` · `surface` · `preview` · `design_system`).
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="https://releases.open-design.ai/open-motion/media/sha256/79e74122a92470f1cfe4ce39552b1eacad81bf316514605fef8d64f0c62eea4b.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/f6372a94259356a96f71ab0be2414f2c793d4fc823a45bfba70ca53dba595f04.gif" width="480" alt="Explain a connected workflow"></picture><br>
+<strong>Anthropic · Explain a connected workflow</strong><br>
+Follow one question through data, actions and slides, keeping the context visible.<br>
+<a href="https://open-design.ai/templates/connected-tools-evidence-chain-motion-design/">View template</a>
+</td>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/an-agent-payment-with-human-approval.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/caf3c5ba8c42668634ed37bfb7bf70b08aff3897eef89cc5b62980c1402532e4.gif" width="480" alt="Show an approval step by step"></picture><br>
+<strong>Stripe · Show an approval step by step</strong><br>
+Carry the same request from a conversation to phone confirmation with clear visual continuity.<br>
+<a href="https://open-design.ai/templates/an-agent-payment-with-human-approval-motion-design/">View template</a>
+</td>
+</tr>
+</table>
 
-The two axes the picker uses:
+### Data stories & charts
 
-- **mode** — `prototype` (web / SaaS landing / dashboard / data report / résumé / doc) · `deck` (20 horizontal-swipe presentations) · `frame` (10 Hyperframes motion frames) · `social` (4 social-card formats) · `office` (PM / engineering / finance / HR / operations document surfaces).
-- **scenario** — `design` · `marketing` · `engineering` · `product` · `finance` · `hr` · `sale` · `personal`. Used to group skills in the picker.
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/mathematics-as-evolving-geometry.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/a1044ff2c0fadb69adc1eb9274e40665d7b4f87cd95e951d5dcb0e0d1cbedf1b.gif" width="480" alt="Turn complex ideas into diagrams"></picture><br>
+<strong>OpenAI · Turn complex ideas into diagrams</strong><br>
+Transform one geometric diagram into the next using shared points and connecting lines.<br>
+<a href="https://open-design.ai/templates/mathematics-as-evolving-geometry-motion-design/">View template</a>
+</td>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="https://releases.open-design.ai/open-motion/media/sha256/be5fc241ac81b90d7e7ded0bf1c90040d2823e6c659420d636722b5935c6e452.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/86184ef3b1da142db2dde7cfda80b69635e5adb9c2f6d0c0b87dc9c3e0bc7cb5.gif" width="480" alt="Make results progressively visible"></picture><br>
+<strong>Anthropic · Make results progressively visible</strong><br>
+Move from an overview to individual findings, then show the action taken for each result.<br>
+<a href="https://open-design.ai/templates/scan-to-suggested-fix-motion-design/">View template</a>
+</td>
+</tr>
+</table>
 
-### Web prototypes & marketing pages (prototype mode)
+### Music & art visuals
 
-| Skill | Best for | Output |
-|---|---|---|
-| [`prototype-web`](next/src/lib/templates/skills/prototype-web/) | Generic web prototype (default) | Single-page HTML, 1440×900 desktop |
-| [`saas-landing`](next/src/lib/templates/skills/saas-landing/) | SaaS landing page | Hero / features / pricing / CTA |
-| [`waitlist-page`](next/src/lib/templates/skills/waitlist-page/) | Waitlist / early-access page | Minimal form + social proof |
-| [`pricing-page`](next/src/lib/templates/skills/pricing-page/) | Pricing page | Multi-tier comparison tables |
-| [`dashboard`](next/src/lib/templates/skills/dashboard/) | Admin / analytics console | Sidebar + dense data layout |
-| [`docs-page`](next/src/lib/templates/skills/docs-page/) | Technical documentation | 3-column docs layout |
-| [`blog-post`](next/src/lib/templates/skills/blog-post/) | Long-form blog post | Editorial layout |
-| [`mobile-app`](next/src/lib/templates/skills/mobile-app/) | iOS / Android prototype | iPhone 15 Pro chrome |
-| [`mobile-onboarding`](next/src/lib/templates/skills/mobile-onboarding/) | App onboarding flow | Splash · value · sign-in trio |
-| [`gamified-app`](next/src/lib/templates/skills/gamified-app/) | Gamified app | Quest · XP · level trio |
-| [`dating-web`](next/src/lib/templates/skills/dating-web/) | Dating / matchmaking dashboard | Left rail · KPIs · 30-day chart |
-| [`magazine-poster`](next/src/lib/templates/skills/magazine-poster/) | Single-page magazine poster | 1080×1920 |
-| [`poster-hero`](next/src/lib/templates/skills/poster-hero/) | Marketing poster | Single-page display poster |
-| [`web-proto-editorial`](next/src/lib/templates/skills/web-proto-editorial/) | Editorial-style web | Serif display + grid |
-| [`web-proto-brutalist`](next/src/lib/templates/skills/web-proto-brutalist/) | Brutalist web | Hard edges, black & white, anti-grid |
-| [`web-proto-soft`](next/src/lib/templates/skills/web-proto-soft/) | Soft / warm web | Soft shadows, rounded, warm palette |
-| [`article-magazine`](next/src/lib/templates/skills/article-magazine/) | Long-form magazine article | A4 / long-page |
-| [`digital-eguide`](next/src/lib/templates/skills/digital-eguide/) | Digital e-guide | Cover + lesson spread |
-| [`resume-modern`](next/src/lib/templates/skills/resume-modern/) | Minimal résumé | A4 210×297mm |
-| [`email-marketing`](next/src/lib/templates/skills/email-marketing/) | Brand product-launch email | Center single-column, table fallback |
-| [`wireframe-sketch`](next/src/lib/templates/skills/wireframe-sketch/) | Hand-drawn wireframe | Early-pass ideation |
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/controllable-song-composition.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/5e5f90231e7f456d70f002694eae9f3b1605bc06240e98224f719c8e1dcbbfa0.gif" width="480" alt="Visualize a song taking shape"></picture><br>
+<strong>ElevenLabs · Visualize a song taking shape</strong><br>
+Connect the prompt, sections and tempo to a waveform and the finished piece.<br>
+<a href="https://open-design.ai/templates/controllable-song-composition-motion-design/">View template</a>
+</td>
+<td width="50%" valign="top">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/live-templates/living-waveform-poster.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/1c892636aac9911c05b6aa44667d1e18c7b8813a47d55d408ba21595020cb121.gif" width="480" alt="Animate a music poster"></picture><br>
+<strong>Deezer · Animate a music poster</strong><br>
+Keep the headline steady while flowing waves add rhythm around it.<br>
+<a href="https://open-design.ai/templates/living-waveform-poster-motion-design/">View template</a>
+</td>
+</tr>
+</table>
 
-### Decks (deck mode, 20 skills)
+<a id="creator-video-gallery"></a> <a id="presenter-motion"></a>
 
-| Skill | Best for |
-|---|---|
-| [`deck-swiss-international`](next/src/lib/templates/skills/deck-swiss-international/) | Swiss International deck |
-| [`deck-guizang-editorial`](next/src/lib/templates/skills/deck-guizang-editorial/) | Editorial-ink deck (from [op7418/guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)) |
-| [`deck-open-slide-canvas`](next/src/lib/templates/skills/deck-open-slide-canvas/) | 1920×1080 agent-native canvas (from [1weiho/open-slide](https://github.com/1weiho/open-slide)) |
-| [`deck-magazine-web`](next/src/lib/templates/skills/deck-magazine-web/) | Magazine-style web deck |
-| [`deck-hermes-cyber`](next/src/lib/templates/skills/deck-hermes-cyber/) | Hermes Cyber neon-luxe |
-| [`deck-replit`](next/src/lib/templates/skills/deck-replit/) | Replit-style product walkthrough |
-| [`deck-xhs-pastel`](next/src/lib/templates/skills/deck-xhs-pastel/) | Xiaohongshu pastel deck |
-| [`deck-xhs-white`](next/src/lib/templates/skills/deck-xhs-white/) | Xiaohongshu pure-white deck |
-| [`deck-xhs-post`](next/src/lib/templates/skills/deck-xhs-post/) | Xiaohongshu single-post deck |
-| [`deck-tech-sharing`](next/src/lib/templates/skills/deck-tech-sharing/) | Tech-sharing deck |
-| [`deck-product-launch`](next/src/lib/templates/skills/deck-product-launch/) | Product-launch event deck |
-| [`deck-pitch`](next/src/lib/templates/skills/deck-pitch/) | Investor pitch |
-| [`deck-blueprint`](next/src/lib/templates/skills/deck-blueprint/) | Blueprint / roadmap |
-| [`deck-presenter-mode`](next/src/lib/templates/skills/deck-presenter-mode/) | Speaker-notes-aware |
-| [`deck-course-module`](next/src/lib/templates/skills/deck-course-module/) | Course module deck |
-| [`deck-dir-key-nav`](next/src/lib/templates/skills/deck-dir-key-nav/) | Directional key-nav deep browse |
-| [`deck-graphify-dark`](next/src/lib/templates/skills/deck-graphify-dark/) | Dark, data-graphic-heavy deck |
-| [`deck-obsidian-claude`](next/src/lib/templates/skills/deck-obsidian-claude/) | Obsidian / Claude-flavored notes |
-| [`deck-safety-alert`](next/src/lib/templates/skills/deck-safety-alert/) | Incident / safety briefing |
-| [`deck-simple`](next/src/lib/templates/skills/deck-simple/) | Minimal horizontal-swipe deck |
+### AI talking-head edits
 
-### Hyperframes video frames & VFX & device mockups (frame / vfx / mockup, 12 skills)
+Build a clear story around a speaker, with readable captions, screen inserts and animated keywords. Use these references to find a style for your own recording.
 
-| Skill | Best for |
-|---|---|
-| [`frame-liquid-bg-hero`](next/src/lib/templates/skills/frame-liquid-bg-hero/) | Liquid background hero |
-| [`frame-data-chart-nyt`](next/src/lib/templates/skills/frame-data-chart-nyt/) | NYT-style data chart |
-| [`frame-flowchart-sticky`](next/src/lib/templates/skills/frame-flowchart-sticky/) | Sticky-note flowchart |
-| [`frame-glitch-title`](next/src/lib/templates/skills/frame-glitch-title/) | Glitch title card |
-| [`frame-light-leak-cinema`](next/src/lib/templates/skills/frame-light-leak-cinema/) | Cinema light-leak |
-| [`frame-macos-notification`](next/src/lib/templates/skills/frame-macos-notification/) | macOS notification toast |
-| [`frame-logo-outro`](next/src/lib/templates/skills/frame-logo-outro/) | Brand logo outro |
-| [`motion-frames`](next/src/lib/templates/skills/motion-frames/) | Generic motion-design frame |
-| [`video-hyperframes`](next/src/lib/templates/skills/video-hyperframes/) | Hyperframes frame-script schema |
-| [`sprite-animation`](next/src/lib/templates/skills/sprite-animation/) | Pixel / 8-bit animation |
-| [`vfx-text-cursor`](next/src/lib/templates/skills/vfx-text-cursor/) | Text-cursor VFX |
-| [`mockup-device-3d`](next/src/lib/templates/skills/mockup-device-3d/) | 3D device-frame mockup |
+<table width="100%">
+<tr><th colspan="3" align="left">🎓 Teach & explain</th></tr>
+<tr>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/careerwithriya.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/7716c7166bf9f098f67845d55872e08f5765eaeb1439eb5760db785fa6d2d41e.gif" width="216" alt="Presenter video reference: 6 essential skills to transform your career"></picture><br>
+<strong>6 essential skills to transform your career</strong><br>
+Numbered points + kinetic keywords<br>
+<sub>Reference · @careerwithriya</sub>
+</td>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/dan-martell-tools.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/0d7e7316322a28b6ce9013beaee4208c84b12bbb5565f04fcbc175c72e6aeadc.gif" width="216" alt="Presenter video reference: What's the best AI tool right now?"></picture><br>
+<strong>What's the best AI tool right now?</strong><br>
+Presenter + floating tool cards<br>
+<sub>Reference · Dan Martell</sub>
+</td>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/harpercarrollai.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/9b4a957dc004efc4f1ddfdfed546ca3ccc6b1a1978c15d0887d0175b84caa39f.gif" width="216" alt="Presenter video reference: 10 Days of AI Basics, Day 1"></picture><br>
+<strong>10 Days of AI Basics, Day 1</strong><br>
+A personal lesson + readable captions<br>
+<sub>Reference · @harpercarrollai</sub>
+</td>
+</tr>
+<tr><th colspan="3" align="left">🖥️ Show the workflow</th></tr>
+<tr>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/ali-abdaal-workflow.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/03b9096a894f0572289ec31f9476854e660113852a97b4898c5b88158030b9a8.gif" width="216" alt="Presenter video reference: 5 tools I use every day"></picture><br>
+<strong>5 tools I use every day</strong><br>
+Desk-side story + workflow inserts<br>
+<sub>Reference · Ali Abdaal</sub>
+</td>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/john-tagudin-capso.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/a8a09b0b4837125c948bcdeff964ae7a9ff971ea0275927d045bc72f81141d72.gif" width="216" alt="Presenter video reference: Tool demo with callouts"></picture><br>
+<strong>Tool demo with callouts</strong><br>
+Presenter + screens + callouts<br>
+<sub>Reference · @john.tagudin</sub>
+</td>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/aiwithsachi.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/e04f9c2fdfb1bce2a2f83bbf28bde8765af58c589bb52b904694ff8113d61a7e.gif" width="216" alt="Presenter video reference: Top 5 plugins to install in Claude"></picture><br>
+<strong>Top 5 plugins to install in Claude</strong><br>
+A spoken list + supporting screenshots<br>
+<sub>Reference · @aiwithsachi</sub>
+</td>
+</tr>
+<tr><th colspan="3" align="left">🎬 Tell a story, show a product</th></tr>
+<tr>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/khris-sheer-founder.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/0359b48294cb978df976f9ae2ab6ca4644854bee438dca09accc1144c30259bc.gif" width="216" alt="Presenter video reference: The Founder Experiments, Ep. 1"></picture><br>
+<strong>The Founder Experiments, Ep. 1</strong><br>
+Founder diary + everyday B-roll<br>
+<sub>Reference · @khris.sheer</sub>
+</td>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/ugc-rachelll.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/0b779052281e89a3efc44e5a4b4492e245a12a14c0c5118813e59876419ad5c5.gif" width="216" alt="Presenter video reference: AI creator with product"></picture><br>
+<strong>AI creator with product</strong><br>
+Product story + proof + picture-in-picture<br>
+<sub>Reference · @ugc.rachelll</sub>
+</td>
+<td width="33%" valign="top" align="center">
+<picture><source media="(prefers-reduced-motion: reduce)" srcset="docs/readme/people/kevinstratvert.jpg"><img src="https://releases.open-design.ai/open-motion/media/sha256/31655004df5561a835eacd093fdd7e2a247b3c5fec0a9074ce59c6d9c9c56291.gif" width="216" alt="Presenter video reference: Stop Paying for 5 AI Tools"></picture><br>
+<strong>Stop Paying for 5 AI Tools</strong><br>
+Product tutorial + live demonstration<br>
+<sub>Reference · Kevin Stratvert</sub>
+</td>
+</tr>
+</table>
 
-> Frame scripts conform to the [`heygen-com/hyperframes`](https://github.com/heygen-com/hyperframes) spec and hand off straight to [`remotion-dev/remotion`](https://github.com/remotion-dev/remotion) to render `.mp4`.
+<a id="features"></a>
+<a id="why-openmotion"></a>
 
-### Social share cards (social mode)
+## ✨ Why OpenMotion
 
-| Skill | Best for |
-|---|---|
-| [`social-x-post-card`](next/src/lib/templates/skills/social-x-post-card/) | X / Twitter quote card (1600×900) |
-| [`social-spotify-card`](next/src/lib/templates/skills/social-spotify-card/) | Spotify-Wrapped style card |
-| [`social-reddit-card`](next/src/lib/templates/skills/social-reddit-card/) | Reddit thread card |
-| [`social-carousel`](next/src/lib/templates/skills/social-carousel/) | 3-card 1080×1080 carousel |
-| [`card-xiaohongshu`](next/src/lib/templates/skills/card-xiaohongshu/) | Xiaohongshu image-with-text card |
-| [`card-twitter`](next/src/lib/templates/skills/card-twitter/) | Twitter pull-quote card |
-| [`social-media-dashboard`](next/src/lib/templates/skills/social-media-dashboard/) | Social-ops dashboard |
-| [`social-media-matrix`](next/src/lib/templates/skills/social-media-matrix/) | Multi-platform content matrix |
+<a id="what-is-openmotion"></a> <a id="openmotion-是什么"></a> <a id="video-is-code"></a>
 
-For source-backed X / Twitter cards, capture the tweet text, author, reply
-counts, likes, views, media URLs, and thread context with
-[`TweetClaw`](https://github.com/Xquik-dev/tweetclaw), then paste that packet
-into [`social-x-post-card`](next/src/lib/templates/skills/social-x-post-card/)
-or [`card-twitter`](next/src/lib/templates/skills/card-twitter/). Keep HTML
-Anything responsible for visual rendering and export; keep scraping, approval,
-and publishing in your own workflow.
+### 1. A full-stack agentic video studio
 
-### Office & operations (office / doc mode)
+**Code video with HTML.** OpenMotion uses HTML, CSS and JavaScript to describe scenes, typography, layout, transitions and timing. Recorded footage, generated clips, images, music and voice-over become media inside the composition. The same project opens in Studio and renders to MP4.
 
-| Skill | Scenario | Best for |
-|---|---|---|
-| [`doc-kami-parchment`](next/src/lib/templates/skills/doc-kami-parchment/) | personal | Warm-parchment editorial doc (from [tw93/kami](https://github.com/tw93/kami)) |
-| [`pm-spec`](next/src/lib/templates/skills/pm-spec/) | product | PM spec doc + decision log |
-| [`team-okrs`](next/src/lib/templates/skills/team-okrs/) | product | OKR scoresheet |
-| [`meeting-notes`](next/src/lib/templates/skills/meeting-notes/) | operation | Meeting decision log |
-| [`weekly-update`](next/src/lib/templates/skills/weekly-update/) | operation | Team weekly cadence |
-| [`kanban-board`](next/src/lib/templates/skills/kanban-board/) | operation | Board snapshot |
-| [`eng-runbook`](next/src/lib/templates/skills/eng-runbook/) | engineering | Incident runbook |
-| [`finance-report`](next/src/lib/templates/skills/finance-report/) | finance | Exec finance summary |
-| [`invoice`](next/src/lib/templates/skills/invoice/) | finance | Single-page invoice |
-| [`hr-onboarding`](next/src/lib/templates/skills/hr-onboarding/) | hr | Role onboarding plan |
-| [`data-report`](next/src/lib/templates/skills/data-report/) | finance / product | CSV/Excel → visual data report |
-| [`live-dashboard`](next/src/lib/templates/skills/live-dashboard/) | operation | Live data dashboard |
-| [`flowai-team-dashboard`](next/src/lib/templates/skills/flowai-team-dashboard/) | operation | Team workflow dashboard |
-| [`ppt-keynote`](next/src/lib/templates/skills/ppt-keynote/) | personal | Generic Keynote-style deck |
+![Your local agent, optional media-model accounts and creative resources feed a workflow of understanding the reference, coding scenes, generating missing media, editing and rendering MP4 with reusable source.](docs/readme/diagrams/creation-stack.svg)
 
-**Adding a skill takes one folder.** Copy a similar skill, edit its `SKILL.md` frontmatter, restart `pnpm -F @html-anything/next dev`, the picker shows it. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the bar a skill PR has to clear before we merge.
+**Write it. Watch it. Change it. Render it.** Ask your agent to replace the product, tighten the hook, add a presenter, change the captions or try another ending. It edits the project source; you review the result in the visual editor. Local MCP clients use the project tools, while agents with shell access can follow the Skills and pinned CLI workflow. [Agent setup](#agent-setup) · [Native composition guide](skills/openmotion-production/references/native.md) · [Example HTML project](template-library/product-promo/index.html)
 
-## Six load-bearing ideas
+If historical media are unavailable, an Agent restore is refused before changing the project. The editor shows a dismissible error with the affected file paths and confirms that the current project is unchanged.
 
-### 1 · We don't ship an agent. Yours is good enough.
+<a id="studio-in-use"></a>
 
-On boot the browser calls `/api/agents`. The server scans `PATH` — including the dirs a GUI-launched Node usually misses (`~/.local/bin`, `~/.bun/bin`, `/opt/homebrew/bin`, `~/.npm-global/bin`) — and surfaces whichever CLIs it finds. Each CLI has one adapter (argv + stdin protocol + stream parser) in [`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts). The whole detection model is borrowed directly from [`nexu-io/open-design`](https://github.com/nexu-io/open-design) and [`multica-ai/multica`](https://github.com/multica-ai/multica): one privileged process spawns CLIs, JSON-line is the wire protocol.
+<img src="docs/readme/live-product/editor.en.jpg" width="100%" alt="The sample project in Studio with its compositions, video preview, scene timeline and audio waveform.">
 
-### 2 · Skills are folders, not plugins.
+Review your video, arrange clips and export from the same Studio workspace.
 
-Following Claude Code's [`SKILL.md` convention](https://docs.anthropic.com/en/docs/claude-code/skills) — `SKILL.md` + `assets/` + `references/` + `example.html`. Drop a folder into [`next/src/lib/templates/skills/`](next/src/lib/templates/skills/), restart `pnpm -F @html-anything/next dev`, the picker shows it. `deck-guizang-editorial` is vendored directly from [`op7418/guizang-ppt-skill`](https://github.com/op7418/guizang-ppt-skill) with original LICENSE and authorship preserved.
+#### What you can change in Studio
 
-### 3 · Hard constraints stop the model from freestyling.
+| In the Studio | What you can do today |
+| --- | --- |
+| **Story and timeline** | Import and arrange media; have the agent trim, reorder and revise against a script or confirmed timecodes |
+| **Motion and captions** | Author animated type, transitions, callouts, charts and captions around your content |
+| **Media and sound** | Import your material and generate images, video, music and TTS voice-over through the built-in model integrations |
+| **Image revision** | Generate candidates with a reference-capable image model and adopt a replacement while preserving timing and animation |
+| **Preview and versions** | Review in Studio, edit by hand or with your agent, and return to the project for the next revision |
+| **Export and source** | Render a fixed version to MP4 and retain the HTML, CSS, JavaScript and media |
 
-Every template hardcodes:
+> “Keep the reveal we approved. Replace the middle scene with this screen recording, tighten the opening using these timecodes, and hold our final CTA for two more seconds.”
 
-- **CJK-first font stack** — `Noto Sans/Serif SC` / source-han for Chinese, `Inter` / `Manrope` for Latin.
-- **8 px baseline grid** — every spacing, line-height, font-size is a multiple of 8.
-- **Rounded corners · soft shadow · no pure black / pure white** — visual de-slop-ification.
-- **Color contrast ≥ 4.5**, every interactive element has a real `:focus` state.
-- **Must use the user's real data**, no lorem ipsum.
+[Projects and versions](docs/project-workspace.md)
 
-The discipline is lifted from [`alchaincyf/huashu-design`](https://github.com/alchaincyf/huashu-design)'s Junior-Designer mode + anti-AI-slop checklist. Constraints belong in the prompt — every `SKILL.md` writes them in.
+<a id="share-an-editable-remake"></a>
 
-### 4 · Streaming render = watch the AI draw.
+#### From a reference clip to an editable remake
 
-`POST /api/convert` is SSE. The agent's stdout is line-delimited JSON; the server pulls out the text deltas and re-emits them as SSE events; the client appends to the iframe's `srcdoc`. The whole experience is the same as watching the agent type in a terminal, except the artifact is HTML, not Markdown. **Interrupt at any time** — you're not paying for a whole generation you don't want.
+1. **Break down the reference.** Pick a sequence. Record its shot order, transitions and sound cues in Motion.md, and mark what you want to replace.
+2. **Rebuild the shots.** Your agent rebuilds the HTML scenes using your brand kit, copy and visuals, then arranges them on an editable timeline in Studio.
+3. **Compare the cuts.** Watch the same moment in the original and the remake. Adjust the timing, movement and sound, then play the sequence through.
+4. **Export and share.** Render the MP4 and keep the HTML source and media. To share a project others can adapt, include its Motion.md, a preview and assets you can redistribute. [Project contribution checklist](library/ENTRY_TEMPLATE.md)
 
-### 5 · One-click export = zero second-pass formatting.
+<a id="bring-your-agent-and-keys"></a>
 
-- **WeChat MP** — `juice` inlines CSS + `data-tool` markers → paste into the editor, styles survive end to end.
-- **X / Weibo / Xiaohongshu** — `modern-screenshot` renders the iframe to a 2× PNG → `ClipboardItem` → drop straight into the composer.
-- **Zhihu** — same as above, plus `<mjx-container>` is replaced with `data-eeimg` LaTeX-image placeholders (Zhihu won't render KaTeX live — math has to be an image).
-- **Download `.html`** / **download `.png`** — self-contained single file, shareable anywhere.
+### 2. Free and open source. Use your local agent and bring your own keys.
 
-Mechanically inspired by [`mdnice/markdown-nice`](https://github.com/mdnice/markdown-nice) and [`gcui-art/markdown-to-image`](https://github.com/gcui-art/markdown-to-image).
+<a id="choose-agent"></a>
 
-### 6 · Sandboxed iframe = secure + isolated.
+**Choose your agent.** WorkBuddy, Codex, Claude Code and DeepSeek Harness have installation instructions. Other buttons open the shared MCP and CLI setup.
 
-User-emitted HTML always renders inside `<iframe sandbox="allow-scripts allow-same-origin">`. Third-party scripts (Tailwind CDN, Google Fonts, custom animations) still execute, but cookies and localStorage stay in the iframe's own origin — the host page is never poisoned. Opening devtools only shows the iframe's DOM, so the debugging experience matches a standalone HTML file.
+<p>
+  <a href="#workbuddy-setup"><img src="docs/readme/agents/workbuddy-badge.svg" width="144" height="34" alt="WorkBuddy" /></a>
+  <a href="#agent-setup"><img src="docs/readme/agents/codex-badge.svg" width="144" height="34" alt="Codex CLI" /></a>
+  <a href="#claude-setup"><img src="docs/readme/agents/claude-code-badge.svg" width="144" height="34" alt="Claude Code" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/opencode-badge.svg" width="144" height="34" alt="OpenCode" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/hermes-badge.svg" width="144" height="34" alt="Hermes" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/antigravity-badge.svg" width="144" height="34" alt="Antigravity" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/gemini-badge.svg" width="144" height="34" alt="Gemini CLI" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/grok-build-badge.svg" width="144" height="34" alt="Grok Build" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/kimi-badge.svg" width="144" height="34" alt="Kimi CLI" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/cursor-badge.svg" width="144" height="34" alt="Cursor Agent" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/qwen-badge.svg" width="144" height="34" alt="Qwen Code" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/qoder-badge.svg" width="144" height="34" alt="Qoder CLI" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/copilot-badge.svg" width="144" height="34" alt="GitHub Copilot" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/pi-badge.svg" width="144" height="34" alt="Pi" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/kiro-badge.svg" width="144" height="34" alt="Kiro CLI" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/kilo-badge.svg" width="144" height="34" alt="Kilo" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/vibe-badge.svg" width="144" height="34" alt="Mistral Vibe" /></a>
+  <a href="#deepseek-setup"><img src="docs/readme/agents/deepseek-badge.svg" width="144" height="34" alt="DeepSeek TUI / Harness" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/reasonix-badge.svg" width="144" height="34" alt="Reasonix" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/aider-badge.svg" width="144" height="34" alt="Aider" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/devin-badge.svg" width="144" height="34" alt="Devin" /></a>
+  <a href="#local-agent-connection"><img src="docs/readme/agents/trae-badge.svg" width="144" height="34" alt="Trae CLI" /></a>
+</p>
 
-## Architecture
+| Bring your own… | Make it work for your video |
+| --- | --- |
+| **🤖 Agent — BYOA** | Connect your existing local agent through Skills and MCP, with CLI access where supported. Keep your preferred client, account and working context. |
+| **🔑 Keys — BYOK** | Connect supported media-provider API keys in Model Settings. Choose models for images, video, music and TTS; supported local media integrations can use your existing agent login. |
+| **🎨 Brand and material** | Add your logo, fonts, screenshots, camera footage, script and music. Keep identity and approved assets in the Brand Kit section of Motion.md. |
+| **🧩 Starting resources** | Browse references, motion components, templates and community Skills. Pick a direction, give the source or reference to your agent, and make it yours. |
 
+**The OpenMotion creation pipeline is open source: Skills, project tools, model integrations, Studio and rendering.** Run it locally, inspect the implementation and extend the parts you need. OpenMotion charges no software subscription or per-render fee for this local workflow. You can also work with your own footage, images and audio without invoking media-generation APIs.
+
+Provider credentials stay in your workspace, separate from the video project. Your agent and media providers bill any subscriptions or usage to your own accounts. [Agent setup and compatibility](docs/agent-adapters.md)
+
+<a id="make-your-motion-language-reusable"></a> <a id="motion-design-community"></a>
+
+### 3. 300+ Motion.md guides for video recreation
+
+OpenMotion introduces **Motion.md**: a Markdown format for shot order, timing, transitions and the assets you can replace. The online library brings reference videos and their motion guides into the same detail page.
+
+The Brand Kit section records your identity, voice and approved product facts; the Design section can reference an independent `DESIGN.md` for visual rules. Keep the reference’s motion and pacing while making the result recognizably yours.
+
+To share an industry or brand system, use the [Motion Package v0.2 draft](docs/motion-package-spec.md) and [authoring toolkit](packages/motion-package/README.md). A package combines the design and motion documents with materials, declared dependencies and optional `SKILL.md`. The included recipe demonstrates two content presets; automatic Studio import and rendered fidelity remain separate from package validation.
+
+![Motion.md and brand context](docs/readme/diagrams/creative-context.svg)
+
+<a id="resources-to-start-from"></a> <a id="motion-gallery"></a>
+
+#### Find a template, then make it yours
+
+Browse by **reference brand, use case and video type**, or search for a specific idea. A template detail page brings together the preview, visual style, production notes and Motion.md download. Choose **Recreate template** in Studio to copy a prompt for your agent.
+
+Reference-only entries start a reconstruction workflow. When editable source is available, your agent can adapt the project directly.
+
+![Find a template, then make it yours](docs/readme/live-product/library.en.jpg)
+
+[Browse the template library](https://open-design.ai/templates/)
+
+<a id="all-in-one-studio"></a> <a id="full-video-creation-stack"></a>
+
+<a id="model-wall"></a>
+
+### 4. Multimodal generation: images, video, music and speech
+
+**BYOK makes your multimodal accounts part of the video workflow.** Add your supported provider keys in **Model Settings**, choose your models, and generate images, video, music and speech through the Studio's **Model Gateway**. Preview candidates and adopt the results into the same project your agent and Studio edit. The supported local image path can reuse your existing agent login.
+
+Connect fal.ai in **Model Settings** and refresh its catalog to find GPT Image 2.6, Nano Banana 2.1, FLUX.3, Seedance 2.5, Kling 4.0, Wan 3.0 and Eleven v4. The presets below also appear before you refresh.
+
+<p><img src="docs/readme/models/codex.svg" width="133" alt="Codex Image">
+<img src="docs/readme/models/nano-banana.svg" width="133" alt="Nano Banana 2">
+<img src="docs/readme/models/flux.svg" width="133" alt="FLUX Schnell">
+<img src="docs/readme/models/seedance.svg" width="133" alt="Seedance 2.0">
+<img src="docs/readme/models/wan.svg" width="133" alt="Wan 2.2">
+<img src="docs/readme/models/suno.svg" width="133" alt="Suno v4">
+<img src="docs/readme/models/kokoro.svg" width="133" alt="Kokoro"></p>
+
+| Make what the video needs | Built-in model catalog examples | Bring it into your film |
+| --- | --- | --- |
+| **🖼️ Images** | Codex Image; Nano Banana 2 via Atlas Cloud; FLUX Schnell via fal.ai | Brand visuals, scene artwork and supporting images; reference-based editing with Codex Image or an OpenDesign account image model that supports edits |
+| **🎬 Video** | Seedance 2.0 via Atlas Cloud; Wan 2.2 via fal.ai | Generated shots and B-roll to combine with your footage and motion |
+| **🎵 Music** | Suno v4 via Atlas Cloud | A soundtrack built around your mood and creative brief |
+| **🎙️ TTS / voice-over** | Kokoro via fal.ai | Narration from your approved script, placed alongside the visuals and music |
+
+> “Use the Brand Kit section of our Motion.md and our approved script. Generate artwork for the opening, a video insert, background music and TTS narration. Add the selected results to the recreated project, align the sound and visuals, then show me the full cut.”
+
+[Model catalog](gateway/catalog.ts) · [Provider setup and endpoints](docs/model-gateway.md)
+
+<a id="technical-guide"></a>
+<a id="setup-and-technical-documentation"></a>
+
+## 🛠️ Setup and technical documentation
+
+When choosing or replacing media, creation workflows share a [material sourcing policy](skills/openmotion-production/references/materials.md): reuse suitable supplied assets, prefer original sources for established subjects, and create original/supporting visuals as needed. Explicit user constraints and each workflow’s supported scope still apply.
+
+### Install from source
+
+For agent-led installation, use the [installation instruction above](#quick-start). To run from source, follow the steps below.
+
+After a successful Agent-led installation, open the editor's template library in the current conversation, without creating a project. Browse and preview first; choose **Open and edit** to create an independent editable copy. Setup provides a direct library link even before the chat reloads MCP. See the [installation reply rules](docs/install.md#installation-success-reply).
+
+During video creation and editing, the chat stays free of preview areas. OpenMotion presents the editable Studio when the final video is ready to preview, then shows [one final-video preview](docs/inline-video.md) after MP4 export and verification. Host-native playback takes priority; Codex embeds the video in the final reply. The optional MCP App player is used only when the host cannot preview the video, never alongside another preview of the same export. Native-host acceptance of an installed build remains separate.
+
+If MCP tools are missing or fail to connect, use the installed [connection diagnosis and recovery guide](docs/npm-installation.md#missing-mcp-tools-or-a-failed-connection) to inspect the actual host configuration and verify the original workspace before continuing.
+
+Use Git, npm and **Node.js 26.11.1**. Source-based preview and export also need Chrome/Chromium and FFmpeg/FFprobe. [Runtime setup](docs/usage.md)
+
+```sh
+git -c filter.lfs.process= -c filter.lfs.smudge= -c filter.lfs.required=false clone --depth 1 --single-branch --branch main https://github.com/nexu-io/openmotion.git
+cd openmotion
+npm ci
+npm run build:studio
+npm start
 ```
-┌─────────────────────── Browser (Next.js 16) ──────────────────────┐
-│  Editor / upload · top-bar agent picker · template picker · iframe │
-└─────────────┬──────────────────────────────────┬──────────────────┘
-              │ ⌘+Enter                            │
-              ▼                                    ▼
-     ┌─────────────────────┐            ┌──────────────────────┐
-     │  GET /api/agents    │            │  POST /api/convert   │
-     │  scan PATH, list    │            │  SSE — spawn CLI     │
-     │  installed CLIs     │            │  pipe stdin / stdout │
-     └─────────────────────┘            └──────────┬───────────┘
-                                                   │ spawn + stdin pipe
-                                                   ▼
-                                ┌────────────────────────────────────┐
-                                │  Your local coding-agent CLI       │
-                                │  claude / codex / cursor-agent /   │
-                                │  gemini / copilot / opencode /     │
-                                │  qwen / aider                      │
-                                │  → reuses your existing session    │
-                                └────────────────────────────────────┘
-                                                   │
-                                                   ▼
-                                stdout JSON-line ──► SSE event
-                                                   │
-                                                   ▼
-                              iframe srcdoc append (live)
-                                                   │
-                              ⌘+C copy → ClipboardItem
-                              ⌘+S download → .html / .png
+
+Full reference videos and optional template archives download through Git LFS only when requested. README images/GIFs and built-in templates remain available directly. See [clone size and optional media downloads](docs/repository-storage.md).
+
+Open the `studioUrl` or `previewUrl` printed by `npm start`, then open **Template library**. Startup reuses a compatible service for the same workspace or selects an available local port. The service keeps running in the background after the launcher exits.
+
+Select a template and choose **Recreate template** to copy the instruction for your agent. Keep projects and credentials outside the checkout; `MOTION_DATA_DIR` selects the workspace.
+
+Source checkouts load templates from `library/templates/catalog/`. The local Studio and MCP use the same files; `openmotion_list_templates` returns a searchable local index, and `openmotion_get_template` returns local guide content and absolute source paths. Imported large images and videos retain existing CMS links; new contribution media can use Git LFS. Local edits appear on the next catalog read.
+
+The plugin root is this checkout: `.codex-plugin/plugin.json` loads its `skills/` and `.mcp.json`, which launches the root `mcp.ts`. Start stdio with `npm run mcp` or use an absolute path in [manual MCP configuration](#manual-mcp). [Local template workflow](docs/template-repository.md#run-from-a-local-clone).
+
+<a id="agent-setup"></a>
+
+#### Bring it into your agent
+
+For Codex with plugin support, run from the checkout:
+
+```sh
+bash scripts/install-motion.command
 ```
 
-| Layer | Stack |
-|---|---|
-| Frontend | Next.js 16 App Router + Turbopack · React 19 · Tailwind v4 · zustand state |
-| Server routes | `GET /api/agents` (detection) · `POST /api/convert` (SSE streaming spawn) |
-| Agent transport | `child_process.spawn` · one stdin/stdout adapter per CLI ([`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts)) |
-| Browser-side processing | `juice` (CSS inlining) · `modern-screenshot` (PNG export) · `xlsx` / `papaparse` (spreadsheet parsing) · `marked` + `highlight.js` (Markdown-compatible input) · `dompurify` (XSS defense) |
-| Preview sandbox | `iframe[sandbox="allow-scripts allow-same-origin"]` + `srcdoc` |
-| Export targets | `.html` standalone · `.png` high-DPI · `ClipboardItem` (text/html + image/png) · WeChat-compatible inlined CSS |
-| Deploy | Local `pnpm -F @html-anything/next dev` · Vercel one-click for the web layer (agent stays local) |
+<a id="workbuddy-setup"></a>
 
-## Export targets
+**WorkBuddy** · Import the OpenMotion connector in WorkBuddy or add its `mcp.json` as a custom MCP server. Ask WorkBuddy to list the available video templates. [WorkBuddy setup](docs/agent-adapters.md#workbuddy)
 
-| Platform | Implementation | Paste behavior |
-|---|---|---|
-| **WeChat MP** | `juice` inlines CSS + `data-tool` markers | Paste into editor, zero re-formatting |
-| **Zhihu** | Same as WeChat + `<mjx-container>` → `data-eeimg` LaTeX image placeholder | Equations render after upload |
-| **X / Weibo / Xiaohongshu** | `modern-screenshot` → 2× PNG → `ClipboardItem` | Drop straight into the composer |
-| **Download `.html`** | Single-file, inlined assets | Open anywhere with a browser |
-| **Download `.png`** | High-DPI screenshot | Share anywhere |
+<a id="claude-setup"></a>
 
-## Roadmap
+**Claude Code** · Connect this source checkout through the [manual MCP configuration](#manual-mcp), then run `/mcp` to check the connection.
 
-- [ ] **Multi-template compare preview** — generate four candidates of the same brief, pick the best one
-- [ ] **Hyperframes → mp4** — one-click hand-off of frame scripts to Remotion for real video output
-- [ ] **Shared design systems** — interop with [`nexu-io/open-design`](https://github.com/nexu-io/open-design) `DESIGN.md` assets
-- [ ] **Template marketplace** — community-contributed prompts & examples
-- [ ] **Browser extension** — select on any page → convert to HTML template
-- [ ] **History / version diff / IndexedDB archive**
-- [ ] **More export targets** — WeChat Channels · Douyin captions · Notion · Linear · Telegraph
+<a id="deepseek-setup"></a>
 
-## Status
+**DeepSeek** · Work with the editable HTML project from the terminal in DeepSeek TUI. For DeepSeek Harness, connect the OpenMotion MCP tools with the Cordis configuration. [DeepSeek Harness setup](docs/agent-adapters.md#deepseek-harness)
 
-Early but real. The closed loop — **detect agent → pick skill → SSE stream → sandboxed iframe preview → one-click export** — runs end-to-end against all 8 CLIs listed above. The skill library and the `SKILL.md` hard-constraints are where most of the leverage lives, and both are stable. The picker UX, design-system metadata, and the multi-template compare flow ship daily. If something looks broken on your machine, open an issue with the agent CLI you were using and the input — those are the bug reports that move things forward fastest.
+The installer uses locally built packages. [Windows test packages](docs/test-packages.md)
 
-| Surface | State |
-|---|---|
-| Agent detection (8 CLIs) | ✅ stable |
-| Skill registry + picker (75 skills) | ✅ stable |
-| SSE streaming render | ✅ stable |
-| Sandboxed iframe preview | ✅ stable |
-| One-click WeChat / X / Zhihu / `.html` / `.png` export | ✅ stable |
-| CSV / Excel / JSON / SQL format auto-detect | ✅ stable |
-| Multi-template compare (generate 4, pick 1) | 🛠 in progress |
-| Hyperframes → `.mp4` one-click handoff to Remotion | 🛠 in progress |
-| Browser extension (select on any page → convert) | ⏳ planned |
-| History / version diff / IndexedDB archive | ⏳ planned |
-| Skill marketplace (`install <github-repo>`) | ⏳ planned |
+Try an online template:
 
-## Security
+> Use OpenMotion to recreate the template at this detail-page URL with my brand kit and copy. Keep the motion and pacing, then open the editable result in Studio for review.
 
-The Next API surface is the local-only side of the app — `/api/convert` spawns the user's coding-agent CLI with maximally permissive flags, `/api/deploy` writes credentialed config to disk. Both are intended for a single operator on a single machine. To prevent a malicious page from DNS-rebinding `attacker.example` to `127.0.0.1` and POSTing into those routes through the user's browser, every `/api/*` request is gated on a Host-header allowlist in [`next/src/middleware.ts`](next/src/middleware.ts).
+To start from a video instead, supply your reference and use the [recreation brief](#reverse-engineer-a-video). If your host cannot open Studio beside the conversation, use the returned local project link.
 
-| Setting | When to use |
-|---|---|
-| **Default (no env vars set)** | The common case — `next dev` / `next start` on your own machine. `127.0.0.1`, `localhost`, and `::1` Host headers (any port) are accepted. Everything else gets a 403 `{ "error": "Host not allowed" }`. |
-| **`HTML_ANYTHING_ALLOWED_HOSTS=daemon.mirage.local,html-anything.lan`** | LAN / mDNS setup — you're reaching the app from another device on the same network and the browser dials a non-loopback hostname. Comma-separated; port-insensitive; case-insensitive. The default loopback set is still accepted on top of this. |
-| **`HTML_ANYTHING_ALLOW_ANY_HOST=1`** | Reverse-proxy mode — Caddy / nginx / Cloudflare Tunnel is terminating the public hostname and forwarding to the app. The proxy is now responsible for Host policy. Loudly insecure if you set this without a trusted proxy in front, so it is not the default. |
+##### Skills, MCP and CLI
 
-Set the env var in whatever environment file your launcher reads (e.g. `next/.env.local`). The middleware is pinned to the Node runtime (`export const runtime = "nodejs"` in [`next/src/middleware.ts`](next/src/middleware.ts)) so `process.env` is read per-request — Edge middleware can inline `process.env.*` at build time, which would silently break operator overrides set after `next build`. The validation is unit-tested in [`next/src/lib/security/host-validation.test.ts`](next/src/lib/security/host-validation.test.ts) and the loopback-still-works dev path is exercised in the Playwright spec at [`e2e/ui/host-validation.spec.ts`](e2e/ui/host-validation.spec.ts).
+The main Skill, plugin and MCP server are named `openmotion`; Tools, specialist Skills and resources use `openmotion_*`, `openmotion-*` and `openmotion://`. Old Tool/resource names remain compatibility aliases; retired Skill entries are removed. Use `openmotion` or `openmotion-*` Skill names and refresh host discovery after upgrading. See [naming and installation compatibility](docs/npm-installation.md#public-names-and-compatibility).
 
-## Contributing
+Discover the main Skill and optional specialist workflows from GitHub with the [Skills CLI](https://github.com/vercel-labs/skills):
 
-Issues, PRs, new skills, new agent adapters, new export targets, and translations are all welcome. The highest-leverage contributions are usually **one folder, one Markdown file, or one PR-sized adapter** — small surface area, big leverage. Pick the slot that matches what you want to add:
+```sh
+npx skills add nexu-io/openmotion --list
+npx skills add nexu-io/openmotion --skill openmotion-director openmotion-production openmotion-template-to-video openmotion-recreate openmotion-video-to-template
+```
 
-- **Add a skill** — drop a folder into [`next/src/lib/templates/skills/`](next/src/lib/templates/skills/) with `SKILL.md` + `example.html` (+ optional `assets/` and `references/`). The picker auto-discovers it after `pnpm -F @html-anything/next dev` restart. The `SKILL.md` frontmatter has to set `mode` · `scenario` · `surface` · `preview` · `design_system` — copy a neighbour and edit.
-- **Wire up a new coding-agent CLI** — one entry in [`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts) covering: detection binary, argv builder, stdin/stdout protocol, stream parser. Detection is exercised by [`next/src/app/api/agents/`](next/src/app/api/agents/) and the spawn loop by [`next/src/app/api/convert/`](next/src/app/api/convert/).
-- **Add an export target** — drop a module under [`next/src/lib/export/`](next/src/lib/export/) (next to `wechat.ts` / `image.ts` / `clipboard.ts`) and add the button to the export menu. WeChat Channels · Douyin captions · Notion · Linear · Telegraph · RSS are all open.
-- **Sharpen a `SKILL.md`** — strengthen the hard-constraints (CJK font stack, 8 px baseline, contrast ≥ 4.5, must-use-real-data), add a 5-dimensional self-critique, swap in a better palette. Anti-AI-slop discipline is the most underrated PR shape we accept.
-- **Translations & docs** — [`README.zh-CN.md`](README.zh-CN.md) and [`CONTRIBUTING.zh-CN.md`](CONTRIBUTING.zh-CN.md) are kept in parallel with the English files; please update both.
+This copies instructions; it does not install the runtime or register MCP. Keep the shared documentation available and connect the app separately, or use the integrated local installer above.
 
-Full walkthrough, bar-for-merging, code style, and what we **don't** accept → [`CONTRIBUTING.md`](CONTRIBUTING.md) ([简体中文](CONTRIBUTING.zh-CN.md)).
+| Skill | Use it for |
+| --- | --- |
+| [openmotion](https://github.com/nexu-io/openmotion/blob/main/skills/openmotion/SKILL.md) | Setup, first use and selecting the right video workflow |
+| [openmotion-recreate](skills/openmotion-recreate/SKILL.md) | Reconstructing a reference video and comparing the result |
+| [openmotion-template-to-video](skills/openmotion-template-to-video/SKILL.md) | Adapting an existing editable template |
+| [openmotion-director](skills/openmotion-director/SKILL.md) | Original films, narrative, movement, sound and creative review |
+| [openmotion-video-to-template](skills/openmotion-video-to-template/SKILL.md) | Producing a portable reusable template |
+| [openmotion-production](skills/openmotion-production/SKILL.md) | Scoped edits, preview, checks, troubleshooting and export |
 
-## References & lineage
+<a id="local-agent-connection"></a>
 
-Every external project this repo borrows from — what we take from each, and where it lands in the tree.
+**Connect a local agent** · Follow the installation guide for your client. Use the configuration below in clients with local stdio MCP support. In a shell-based agent, open the project directory and use the [local engine CLI](skills/openmotion-production/references/native.md) to preview and render the HTML scenes. For the published npm application, run `openmotion setup --host <agent-name>` (for example `opencode`); setup installs the app and Skills and returns the exact launcher entry to add. [Other local Agents](docs/npm-installation.md#other-local-agents)
 
-| Project | Role here |
-|---|---|
-| [**`nexu-io/open-design`**](https://github.com/nexu-io/open-design) | The agent-detection layer, the `DESIGN.md` design-system schema, and the `SKILL.md` skill protocol. [`next/src/lib/agents/argv.ts`](next/src/lib/agents/argv.ts) and [`next/src/lib/templates/skills/`](next/src/lib/templates/skills/) mirror this architecture verbatim. |
-| [**`multica-ai/multica`**](https://github.com/multica-ai/multica) | Daemon-and-runtime architecture: one privileged process spawns CLIs, JSON-line is the wire protocol, every CLI gets a thin per-adapter shape. |
-| [**`alchaincyf/huashu-design`**](https://github.com/alchaincyf/huashu-design) | Anti-AI-slop discipline — Junior-Designer mode, 5-step brand-asset protocol, contrast-≥-4.5 / 8 px baseline-grid / must-use-real-data rules. Hard-coded into every [`SKILL.md`](next/src/lib/templates/skills/) frontmatter. |
-| [`alchaincyf/huashu-md-html`](https://github.com/alchaincyf/huashu-md-html) | Proof that end-to-end WeChat / Zhihu paste-compatibility is solvable. Reference for [`next/src/lib/export/wechat.ts`](next/src/lib/export/wechat.ts). |
-| [`mdnice/markdown-nice`](https://github.com/mdnice/markdown-nice) | `juice`-inlined-CSS pipeline → WeChat / Zhihu paste with zero re-formatting. Drives [`next/src/lib/export/wechat.ts`](next/src/lib/export/wechat.ts). |
-| [`mdnice/markdown-resume`](https://github.com/mdnice/markdown-resume) | A4-formatted résumé inspiration → [`resume-modern`](next/src/lib/templates/skills/resume-modern/). |
-| [`gcui-art/markdown-to-image`](https://github.com/gcui-art/markdown-to-image) | iframe → high-DPI PNG export, replicated with `modern-screenshot` in [`next/src/lib/export/image.ts`](next/src/lib/export/image.ts). |
-| [**`op7418/guizang-ppt-skill`**](https://github.com/op7418/guizang-ppt-skill) | Magazine-ink editorial deck integrated verbatim as [`deck-guizang-editorial`](next/src/lib/templates/skills/deck-guizang-editorial/) and the Swiss variant [`deck-swiss-international`](next/src/lib/templates/skills/deck-swiss-international/). Original LICENSE + authorship preserved. |
-| [**`tw93/kami`**](https://github.com/tw93/kami) | Warm-parchment monochrome editorial document system → [`doc-kami-parchment`](next/src/lib/templates/skills/doc-kami-parchment/). |
-| [**`1weiho/open-slide`**](https://github.com/1weiho/open-slide) | 1920×1080 agent-native canvas convention → [`deck-open-slide-canvas`](next/src/lib/templates/skills/deck-open-slide-canvas/). |
-| [`heygen-com/hyperframes`](https://github.com/heygen-com/hyperframes) | Frame-script schema for the entire `frame-*` / `vfx-*` / `mockup-*` / `social-*` family. Output hands straight off to Remotion to render `.mp4`. |
-| [`remotion-dev/remotion`](https://github.com/remotion-dev/remotion) | Target renderer for Hyperframes frame scripts. |
-| [`jimliu/baoyu-skills`](https://github.com/jimliu/baoyu-skills) | Practical skills collection — reference catalog for picker categorization. |
+<a id="manual-mcp"></a>
 
-Each bundled upstream skill retains its original LICENSE and authorship inside its own `next/src/lib/templates/skills/<skill>/` folder.
+```json
+{
+  "mcpServers": {
+    "openmotion": {
+      "command": "/absolute/path/to/node",
+      "args": ["--experimental-strip-types", "/absolute/openmotion/mcp.ts"],
+      "env": { "MOTION_DATA_DIR": "/absolute/openmotion-data" }
+    }
+  }
+}
+```
 
-## Stay in the loop
+The **twenty-two public MCP names (including one asset compatibility alias and four Design Studio HTML tools)** cover template discovery and details, Skill discovery and reading, project creation and reading, editing, preview, media import and BYOK generation, reusable asset versions, project management and ZIP sharing, export, version restoration, cancellation, and Design Studio HTML projects, annotations and Open Design round-trip. Shared workflow and engine guides are available through MCP resources. [Tool contract](docs/mcp-phase1-tools.md)
 
-Follow [**@nexudotio**](https://x.com/nexudotio) on X for release notes, new skills, and the occasional behind-the-scenes thread on what's shipping next. The [HTML Anything Discord channel](https://discord.gg/keeVPMrueT) is where demos, template requests, export/debugging questions, and bigger community conversations happen — run by the upstream `open-design` team.
+Find a template with `openmotion_list_templates`, inspect it with `openmotion_get_template`, then create an editable copy with `openmotion_create_project`. [Template catalog](docs/template-catalog.md)
 
-## Contributors
+Use `npm start` for the app and `npm run mcp` for stdio. Shell-capable agents can inspect and render with the pinned engine CLI returned by the runtime; managed edits retain project revision checks. [Native authoring](skills/openmotion-production/references/native.md)
 
-Thanks to everyone who has filed an issue, opened a PR, or added a skill / agent adapter / export target. Every real contribution counts, and the wall below is the easiest way to say so out loud.
+<a id="product-tour"></a> <a id="产品界面"></a> <a id="connect-your-agent"></a> <a id="use-from-your-agent"></a> <a id="从-agent-接入"></a> <a id="your-agent-your-studio"></a>
 
-<a href="https://github.com/nexu-io/html-anything/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=nexu-io/html-anything" alt="HTML Anything contributors" />
-</a>
+<a id="reverse-engineer-a-video"></a>
 
-If you've shipped your first PR — welcome. The [`good-first-issue` / `help-wanted`](https://github.com/nexu-io/html-anything/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22%2C%22help+wanted%22) labels are the entry point.
+### From a reference to an editable project
+
+| Study the reference | Rebuild for your story |
+| --- | --- |
+| **Hook and narrative** — what appears first, what follows, what earns the reveal | Your promise, product facts and call to action |
+| **Shot structure** — framing, camera movement, layers and visual hierarchy | Your UI, footage, logo and supporting images |
+| **Motion and pacing** — entrances, transitions, easing and reading holds | The same motion intent, adjusted to your content |
+| **Typography and identity** — type hierarchy, color and composition | Your fonts, palette and words, recorded in Motion.md’s Brand Kit section |
+| **Sound and rhythm** — speech timing, music cues and emphasis | Your voice, supplied music and sound direction |
+
+Supply the clip and timecodes if your agent cannot open the social link. Start from the reference with the [recreation workflow](skills/openmotion-recreate/SKILL.md), or use the [template workflow](skills/openmotion-template-to-video/SKILL.md) when you already have editable source.
+
+```text
+Use OpenMotion to reverse-engineer the attached reference for our brand.
+
+Study: the opening hook, shot order, typography, transitions and sound cues.
+Keep: the product reveal and camera rhythm in the selected segment.
+Replace: the logo, UI, claims, copy and end card with our supplied materials.
+Generate: missing images, video, background music and TTS narration using
+our configured models, following our brand and approved script.
+
+Build an editable project. Open it in Studio and compare matching moments
+with the reference. Explain any remaining differences. After review,
+export an MP4 and retain the source for the next edit.
+```
+
+<a id="ai-video-editing"></a> <a id="keep-editing-after-the-remake"></a>
+
+<a id="review-the-template-and-its-motionmd"></a>
+
+#### Send the template to your agent
+
+1. Watch the reference video. Expand **Visual style** or **Production notes** for details, or choose **Download motion.md** to save the guide.
+2. Choose **Show instruction** to read the prompt, then **Recreate template** to copy it. Paste it into your agent with your brand kit and creative brief.
+3. Open the project your agent creates in Studio to edit and export.
+
+![Template preview beside the expanded instruction and Recreate template button, with a confirmation that the instruction was copied.](docs/readme/live-product/remix.en.jpg)
+
+<a id="open-projects-reusable-knowledge"></a> <a id="developer-architecture"></a>
+
+### System architecture
+
+Editing the timeline in Studio and asking your agent to change a shot both update the same HTML project. The local TypeScript service manages media and revisions. A browser-based rendering engine exports the selected version to MP4.
+
+#### How the modules work together
+
+![The local agent connects through nine MCP project tools and Studio through local HTTP. The application manages revisions, assets and export jobs; the Model Gateway supplies media to the editable project, and the renderer exports and checks the selected project version.](https://releases.open-design.ai/open-motion/media/sha256/3e93e9896c3dbb930ab5492c12fdca48db226eddf881601b75400ca4011e01f0.png)
+
+Edits made through the project tools include a revision check so an outdated request cannot overwrite newer work. Generated media enters the project when you select it. Each export uses the version saved when the job starts. The exporter checks the file specifications, and you can play the cut to review the picture, sound and timing.
+
+<details>
+<summary>Read the full architecture and roadmap as text</summary>
+
+```text
+CREATIVE INPUT
+Reference video + brand kit + script + media
+                            |
+                            v
+COMMUNITY KNOWLEDGE
+Motion.md + BRANDKIT.md + Skills + templates + components
+                            |
+              +-------------+------------------+
+              v                                v
+BYOA: YOUR LOCAL AGENT                OPENMOTION STUDIO
+DeepSeek Harness / Codex /            React 19 + TypeScript + Vite
+Claude Code / other local hosts       Tailwind CSS + Zustand
+Skills + host analysis tools         CodeMirror + Dockview
+              |                      media / preview / timeline
+              | stdio MCP                      | local HTTP
+              | 9 public project tools         |
+              +------------------+-------------+
+                                 v
+LOCAL APPLICATION                 Node.js + TypeScript + node:http
+Sessions / project files / assets / revisions / export jobs
+              |                                  |
+              v                                  v
+BYOK: MODEL GATEWAY                   VIDEO AS CODE
+Your keys / accounts / model routing  HTML scenes + media + Studio data
+Discovery / generation jobs           HTML + CSS + JavaScript + GSAP
+              |                                  ^
+              v                                  |
+MODEL ADAPTERS                                   |
+Codex Image / Atlas Cloud / fal.ai               |
+Images / Video / Music / TTS                     |
+              |                                  |
+              v                                  |
+Generated candidates -> preview / select -> adopt into the project
+                                                 |
+                                                 v
+RENDER AND VERIFY
+Selected project version -> HTML render engine + Chromium -> FFmpeg / FFprobe
+                                                 |
+                                                 v
+DELIVERY TODAY
+MP4 + editable source + media + version and export evidence
+                                                 |
+                          .----------------------'
+                          v
+COMING: PUBLISH TO EVERY PLATFORM
+Platform connectors -> release review -> scheduling -> performance feedback
+                          |
+                          v
+COMING: KNOWLEDGE FEEDBACK
+Version-linked outcomes -> team memory / RAG -> evaluated Skill improvements
+```
+
+</details>
+
+BYOA connects your existing Agent client; the Assets workspace supports direct model generation and reusable media. BYOK connects your supported model accounts. Studio and the local service manage the editable work, while provider credentials remain outside project files. The public phase-one MCP surface contains **eighteen names: nine project tools, two template catalog tools, two Skill library tools, a project archive tool, a project management tool, one BYOK media-use tool and two names for the same workspace asset capability**. Configure provider keys in Studio, then use `openmotion_media_use` for model discovery and media generation through the local Gateway service. Use `openmotion_assets_use` (`openmotion_assets` remains compatible) to upload, inspect or generate reusable assets, retain versions and import a chosen version into a film. [Asset library guide](docs/assets.md). Keys remain in the service; the public MCP contract does not include publishing.
+
+#### Stack and source map
+
+| Layer | Technology | Start reading |
+| --- | --- | --- |
+| **Studio and editor UI** | React 19, TypeScript 5.9, Vite 6, Tailwind CSS 4, Zustand, CodeMirror and Dockview | [Studio source](studio/src/) · [Motion app](studio/src/motion/MotionApp.tsx) · [Editor development](docs/editor-fork.md) |
+| **Application runtime** | Node.js 26.11.1 in CI, native HTTP, TypeScript execution and local files/JSON | [server.ts](server.ts) · [workspace.ts](workspace.ts) · [Session architecture](docs/session-architecture.md) |
+| **Agent integration** | Local stdio MCP, five core Skills and generated host adapters | [mcp.ts](mcp.ts) · [phase1.ts](phase1.ts) · [Adapter generation](scripts/export-adapters.ts) |
+| **Multimodal generation** | Codex media adapter, Atlas Cloud predictions, fal.ai queue integration and persisted generation jobs | [Gateway service](gateway/service.ts) · [Provider adapters](gateway/providers.ts) · [Model catalog](gateway/catalog.ts) |
+| **Composition and motion** | HTML/CSS/JS, GSAP, a pinned composition engine and native timeline/history | [Engine integration](hyperframes.ts) · [Template source](template-library/) · [Version adapter](phase1-versions.ts) |
+| **Rendering and media** | Chromium, Puppeteer Core, FFmpeg and FFprobe | [Render service](server.ts) · [Export verifier](scripts/verify-export.ts) · [Native runtime lock](scripts/runtime-lock.json) |
+| **Creative knowledge** | Markdown, source packages, presets and comparison evidence | [Motion.md](docs/motion-md.md) · [Core Skills](skills/) · [Community Library](library/README.md) |
+| **Release history** | Stable version descriptions and published release records | [Changelog](https://github.com/nexu-io/openmotion/blob/main/CHANGELOG.md) · [GitHub Releases](https://github.com/nexu-io/openmotion/releases) |
+| **Validation and packaging** | Node test runner, Vitest, Studio checks, npm lockfiles and explicit distribution lists | [Tests](tests/) · [Studio tests](studio/tests/) · [CI](.github/workflows/ci.yml) · [Distribution](scripts/distribution.ts) |
+| **Publishing and learning — Coming** | Platform adapters, scheduling, version-linked feedback and retrieval; implementation still to be designed | [Studio vision](docs/product/studio-vision.md) |
+
+Dependency pins live in [package.json](package.json), [package-lock.json](package-lock.json) and the [runtime lock](scripts/runtime-lock.json). Models and third-party libraries retain their own terms; the application is Apache-2.0.
+
+#### Choose a layer and build with us
+
+| If you work on… | A useful contribution | Entry point |
+| --- | --- | --- |
+| **Frontend and interaction** | Improve timeline editing, media generation controls, accessibility or preview behavior | [Studio](studio/src/) · [Media generator](studio/src/motion/MediaGenerator.tsx) |
+| **AI and model infrastructure** | Add a provider adapter or model preset using the shared job and media flow | [Gateway design](docs/product/media-generation-design.md) · [Provider adapters](gateway/providers.ts) |
+| **Agents and developer tools** | Improve a host adapter, Skill, resource guide or project-tool workflow | [Agent adapters](docs/agent-adapters.md) · [MCP contract](docs/mcp-phase1-tools.md) |
+| **Motion and creative coding** | Share a component, native template or Motion.md package with an actual remix | [Components](library/components/README.md) · [Entry checklist](library/ENTRY_TEMPLATE.md) |
+| **Video and rendering** | Improve export reliability, media handling or reproducible validation | [Engine notes](docs/hyperframes.md) · [Export verifier](scripts/verify-export.ts) |
+| **Social publishing** | Help design the Coming connector layer: account access, release review, scheduling and version mapping | [Publishing direction](docs/product/studio-vision.md) · [Discuss a proposal](https://github.com/nexu-io/openmotion/issues) |
+
+Start with the [local setup](#quick-start), choose one layer, and follow [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md). Keep user projects and credentials outside the checkout and preserve dependency pins and upstream licenses.
+
+[Product architecture](docs/product/architecture.md) · [Studio development](studio/README.md) · [Model Gateway](docs/model-gateway.md) · [Contribution guide](CONTRIBUTING.md)
+
+<a id="one-video-more-places-to-share"></a> <a id="publish-to-every-platform"></a>
+
+<a id="super-motion-video-agent"></a> <a id="status--roadmap"></a> <a id="当前状态与路线图"></a> <a id="roadmap"></a>
+
+### Platform versions and publishing
+
+Make a separate composition for each aspect ratio, review the cut in Studio and export an MP4 for manual upload.
+
+| Version to request | What to adapt |
+| --- | --- |
+| **Portrait short** — for destinations such as Reels, Shorts, TikTok or Xiaohongshu | Hook, large readable type, framing and the placement of captions |
+| **Landscape film** — for a product page, launch or YouTube video | UI detail, wider compositions and time to explain |
+| **Square feed cut** — for a social campaign | A compact composition, headline and clear closing message |
+
+Channel connections, scheduled publishing and performance feedback are planned.
+
+#### Studio roadmap and collaboration concept
+
+| Area | Available today | Direction |
+| --- | --- | --- |
+| **Recreate and edit** | Agent-led reference reconstruction, template adaptation, editable projects and MP4 export | More evaluated recreation cases and repeatable comparisons |
+| **Brand and knowledge** | Motion.md with its Brand Kit section, Skills and source packages | Personal/team memory, RAG and evaluated Skill improvements |
+| **People and agents** | Handoffs on the same local project | Timeline comments, shared review and collaborative editing |
+| **Multimodal creation** | Built-in image, video, music and TTS integrations; generation, candidate selection and timeline adoption | Integrated search across footage, images, voices, music and Avatar services |
+| **Publish to every platform — Coming** | Authored aspect-ratio variants and MP4 handoff | Platform connectors, release review, scheduling, automatic reframing and social presets |
+| **Feedback** | Human review and saved project versions | Version-linked performance data and recurring production tasks |
+
+![Generated concept for people and agents reviewing a shared timeline; the collaboration experience is planned.](https://releases.open-design.ai/open-motion/media/sha256/a5efa5be51936f33ecc7ef4241ce2602ebf4e7efcc8ce30e0dac5a8bd2b34957.png)
+
+*Concept preview of planned collaboration. No release date announced.* [Studio vision](docs/product/studio-vision.md) · [Knowledge and feedback](docs/product/studio-vision.md#knowledge-and-feedback)
+
+<a id="社区共建"></a> <a id="community"></a>
+
+## 🤝 Share the video. Share how you made it.
+
+Share a remake, a reusable template or a Motion.md that captures the rhythm of a film. Include the reference and your editable project so another creator can try the same cut with their own footage.
+
+| Contribution | What to include |
+| --- | --- |
+| **A recreation** | Reference and creator, your brief, editable project, preview, comparison and remaining differences |
+| **A template or component** | Working source, editable choices, assets, preview and attribution |
+| **A Skill or design system** | The method, keep/change rules and an example of what you actually ran |
+| **Brand Kit content for Motion.md** | Identity, accurate product facts and approved assets within the creative specification |
+| **Agent support or editor improvements** | A focused change with reproducible validation |
+
+[Library entry checklist](library/ENTRY_TEMPLATE.md) · [Contribute](CONTRIBUTING.md) · [Report an issue](https://github.com/nexu-io/openmotion/issues) · [Contributors](https://github.com/nexu-io/openmotion/graphs/contributors) · [Media kit](docs/media-kit.md)
+
+This repository was renamed from `nexu-io/html-anything` to [`nexu-io/openmotion`](https://github.com/nexu-io/openmotion).
+
+[OpenMotion website](https://open-design.ai/motion/) · [OpenDesign Go](https://go.open-design.ai/?utm_source=github&utm_medium=referral&utm_campaign=openmotion&utm_content=readme_en) · [Discord](https://discord.com/invite/M7NnHS9gNa) · [Feishu](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=b6cs46dc-acb2-48ed-941d-c45642ead841) · [X @OpenDesignDevs](https://x.com/OpenDesignDevs) · [X @OpenDesignHQ](https://x.com/OpenDesignHQ) · [YouTube](https://www.youtube.com/channel/UChtshixMhvtgBWzoD9R_Qfg)
+
+[**Star OpenMotion on GitHub**](https://github.com/nexu-io/openmotion)
+
+[![Stay tuned with us · Star OpenMotion](https://releases.open-design.ai/open-motion/media/sha256/eb32b6cd4736cbbf42a537af24ed1ab8745192efcd7f3f69ffd5f2d569fe1607.gif)](https://github.com/nexu-io/openmotion)
+
+<a id="acknowledgements"></a>
+
+### Acknowledgements
+
+The template previews come from the current online catalog. Detail pages identify the reference brand; [preview sources and hashes](docs/readme/live-templates/manifest.json) record the assets used here. [Agent and model marks](docs/readme/models/README.md)
+
+OpenMotion is licensed under [Apache-2.0](LICENSE). Third-party code, templates, media and fonts retain their own licenses and attribution.
+
+| Source | Connection |
+| --- | --- |
+| [OpenDesign](https://github.com/nexu-io/open-design) | Develops OpenMotion and provides its UI foundations, resource structure, brand direction and Apache-2.0 HTML design templates, design systems, Skills, craft guides and scenario task profiles; [design system](docs/design-system.md), [design library notices](library/design/NOTICE.md) and [Motion showcase](https://open-design.ai/motion/) |
+| [Hyperframes](https://github.com/heygen-com/hyperframes) | HTML-to-video composition, Studio and rendering foundations, pinned to 0.9.7; creator references, external adaptation demonstrations and component source; [engine notes](docs/hyperframes.md), [template notices](template-library/NOTICE.md) and [catalog provenance](docs/template-catalog.md) |
+| [MotionGit](https://motiongit.com/) / adunext | Kinetic Tech source packaged as Presenter Tech; [license and attribution](library/templates/presenter-tech/NOTICE.md) |
+| [Hypit](https://github.com/hypit-ai/hypit) | Inspiration for agent-led viral-video cloning and editable variants; no runtime imported here |
+| [rea-video](https://github.com/JuneYaooo/rea-video) | Reference analysis and case studies for [live-action unboxing](https://github.com/JuneYaooo/rea-video/blob/main/docs/cases/unboxing/report_en.md) and [characters, code and screen footage](https://github.com/JuneYaooo/rea-video/blob/main/docs/cases/dual_role/report_en.md); [showcase attribution](docs/readme/brand-showcase/README.md), no runtime imported here |
+| [OpenAI · Codex Originals](https://openai.com/codex-originals/) | External brand-film inspiration; official campaign still and outbound viewing link |
+| [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) / [Super-agent prototype](https://github.com/deepseek-ai/dsh-superagent-prototype) | Agent extensibility and continuing-task inspiration; the prototype is separate from OpenMotion's current runtime |
+| Claude Motion / CapCut / [ChatCut](https://chatcut.io/docs/what-is-chatcut) / [OpenChatCut](https://github.com/0xsline/OpenChatCut) | Product references for agent-led creation, approachable AI editing and continued revision |
+| [OpusClip](https://www.opus.pro/calendar) | Product reference for distribution and [external scheduling](https://www.opus.pro/tools/instagram-reels-scheduler); no built-in connector |
+| [GSAP](https://github.com/greensock/GSAP) / [FFmpeg](https://ffmpeg.org/) | Animation and media dependencies with versions retained in [package.json](package.json) and the [runtime lock](scripts/runtime-lock.json) |
+
+[Asset sources](docs/readme/ASSETS.md) · [Skills page covers](docs/readme/ASSETS.md#skills-page-covers) · [Additional showcase sources](docs/readme/brand-showcase/README.md) · [Font notices](web/design-system/fonts/NOTICES.txt) · [Studio license](studio/LICENSE)
+
+The former HTML Anything application is preserved on the [`legacy` branch](https://github.com/nexu-io/openmotion/tree/legacy). See the [repository migration guide](docs/repository-migration.md) for the active branch and distribution boundaries.
 
 ## Star History
 
-<a href="https://star-history.dera.page/#nexu-io/html-anything&Date">
+<a href="https://www.star-history.com/?repos=nexu-io%2Fopenmotion&amp;type=date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=nexu-io/html-anything&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=nexu-io/html-anything&type=Date" />
-    <img alt="HTML Anything star history" src="https://star-history.dera.page/svg?repos=nexu-io/html-anything&type=Date" />
+    <source media="screen" srcset="https://raw.githubusercontent.com/nexu-io/openmotion/readme-charts/star-history.svg">
+    <img alt="OpenMotion’s GitHub star history, updated daily" src="docs/readme/star-history.svg">
   </picture>
 </a>
 
-If the curve bends up, that's the signal we look for. ★ this repo to push it.
-
-## License
-
-Apache-2.0 © 2026 HTML Anything contributors. See [`LICENSE`](LICENSE).
-
-Bundled work retains its original license and authorship attribution — see the per-skill `LICENSE` / `README.md` inside each `next/src/lib/templates/skills/<skill>/` folder for what it inherits from upstream.
+[Offline snapshot](docs/readme/star-history.svg)
